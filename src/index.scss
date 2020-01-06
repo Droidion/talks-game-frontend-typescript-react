@@ -3,6 +3,10 @@
 
 @import-normalize;
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 13px;
 }
@@ -12,4 +16,9 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }
