@@ -1,10 +1,19 @@
+.badge {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+}
+
 .wrapper {
+  align-items: center;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url(./background.jpg);
   background-size: cover;
-  position: absolute;
   bottom: 0;
+  display: flex;
+  justify-content: center;
   left: 0;
+  position: absolute;
   right: 0;
   top: 0;
 }

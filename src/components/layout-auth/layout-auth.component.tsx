@@ -1,11 +1,14 @@
 import React from "react";
 
 import styles from "./layout-auth.module.scss";
+import Badge from "../badge/badge.component";
 
 const LayoutAuth: React.FC = () => {
   return (
     <div className={styles.wrapper}>
-      <h1>Auth Layout</h1>
+      <div className={styles.badge}>
+        <Badge />
+      </div>
     </div>
   );
 };
