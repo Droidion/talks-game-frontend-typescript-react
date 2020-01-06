@@ -13,12 +13,19 @@ html {
 
 body {
   background: url(./background.png);
+  color: colors.$main-font-color-on-dark;
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1,
+h2,
 ul {
   margin: 0;
   padding: 0;
+}
+
+button:hover {
+  cursor: pointer;
 }

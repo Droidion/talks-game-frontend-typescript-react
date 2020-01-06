@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import "./App.scss";
 
 import LayoutAuth from "./components/layout-auth/layout-auth.component";
 import LayoutMain from "./components/layout-main/layout-main.component";

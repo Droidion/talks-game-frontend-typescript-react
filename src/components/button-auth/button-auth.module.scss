@@ -1,0 +1,17 @@
+@use "../../styles/colors";
+
+.btn {
+  background-color: white;
+  border: 0;
+  border-radius: 1.1rem;
+  color: colors.$main-font-color-on-bright;
+  font-size: 1.1rem;
+  font-weight: 500;
+  height: 2.2rem;
+  padding: 0 0.8rem;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: colors.$highlight-color;
+  }
+}

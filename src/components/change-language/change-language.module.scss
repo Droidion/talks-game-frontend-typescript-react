@@ -1,11 +1,22 @@
+@use '../../styles/colors';
+
 .wrapper {
   li {
     color: white;
     font-size: 2rem;
-    margin: 0 1rem;
     display: inline-block;
+    margin-left: 1.5rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &:hover {
+      color: colors.$highlight-color;
       cursor: pointer;
     }
   }
