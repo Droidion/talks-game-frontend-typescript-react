@@ -1,7 +1,7 @@
 @use "../../styles/colors";
 
 .btn {
-  background-color: white;
+  background-color: colors.$plain-bright-background;
   border: 0;
   border-radius: 1.1rem;
   color: colors.$main-font-color-on-bright;
