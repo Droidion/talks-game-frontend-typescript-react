@@ -1,7 +1,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: 18rem 1fr;
-  grid-template-rows: 4rem 4rem 1fr;
+  grid-template-rows: 4.5rem 4.5rem 1fr;
 }
 
 .content {
@@ -17,7 +17,6 @@
 .logo {
   grid-column: 1 / 1;
   grid-row: 1 / span 2;
-  padding: 1rem;
 }
 
 .header {

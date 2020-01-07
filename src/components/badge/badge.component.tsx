@@ -1,12 +1,17 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
+import { ReactComponent as LogoSvg } from "../../images/logo.svg";
 import styles from "./badge.module.scss";
-import { ReactComponent as BadgeSvg } from "./badge.svg";
 
 const Badge: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
-      <BadgeSvg />
+      <div>
+        <LogoSvg />
+      </div>
+      <div className={styles.caption}>{t("Trainings and Simulations")}</div>
     </div>
   );
 };

@@ -1,3 +1,17 @@
+@use "../../styles/colors";
+
 .wrapper {
-  width: 10rem;
+  background-image: url(./badge.png);
+  background-size: contain;
+  height: 196px;
+  padding: 20px;
+  width: 235px;
+}
+
+.caption {
+  color: colors.$main-font-color-on-bright;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
 }
