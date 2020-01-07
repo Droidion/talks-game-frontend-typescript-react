@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import styles from "./layout-main.module.scss";
 import { RootState } from "../../redux/root-reducer";
 import LogoPanel from "../logo-panel/logo-panel.component";
+import ContentPanel from "../content-panel/content-panel.component";
 import Header from "../header/header.component";
 import ISessionState from "../../types/ISessionState";
 
@@ -17,7 +18,9 @@ const LayoutMain: React.FC<ISessionState> = ({ session }) => {
         <Header />
       </div>
       <div className={styles.menu}>menu</div>
-      <div className={styles.content}>content</div>
+      <div className={styles.content}>
+        <ContentPanel />
+      </div>
     </div>
   );
 };

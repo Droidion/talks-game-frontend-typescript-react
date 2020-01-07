@@ -1,0 +1,12 @@
+@use "../../styles/backgrounds";
+@use "../../styles/colors";
+@use "../../styles/shadows";
+
+.wrapper {
+  background-color: colors.$dark-background;
+  border: 2px solid colors.$border-for-dark-background;
+  border-radius: 0.4rem;
+  box-shadow: shadows.$box-shadow-default;
+  min-height: calc(100vh - 6.5rem);
+  margin: 1rem 1rem 0 0;
+}
