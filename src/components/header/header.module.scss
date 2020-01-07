@@ -1,0 +1,9 @@
+@use "../../styles/backgrounds";
+@use "../../styles/colors";
+
+.wrapper {
+  background: backgrounds.$gray-gradient;
+  border-radius: 0.4rem;
+  height: 3.5rem;
+  margin: 1rem 1rem 0 0;
+}
