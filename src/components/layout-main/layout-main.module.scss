@@ -1,3 +1,26 @@
 .wrapper {
-  color: white;
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  grid-template-rows: 4rem 4rem 1fr;
+}
+
+.content {
+  grid-column: 2 / 2;
+  grid-row: 2 / span 2;
+}
+
+.menu {
+  grid-column: 1 / 1;
+  grid-row: 3 / 3;
+}
+
+.logo {
+  grid-column: 1 / 1;
+  grid-row: 1 / span 2;
+  padding: 1rem;
+}
+
+.header {
+  grid-column: 2 / 2;
+  grid-row: 1 / 1;
 }

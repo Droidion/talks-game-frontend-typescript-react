@@ -3,13 +3,18 @@ import { connect } from "react-redux";
 
 import styles from "./layout-main.module.scss";
 import { RootState } from "../../redux/root-reducer";
+import LogoPanel from "../logo-panel/logo-panel.component";
 import ISessionState from "../../types/ISessionState";
 
 const LayoutMain: React.FC<ISessionState> = ({ session }) => {
   return (
     <div className={styles.wrapper}>
-      <h1>Main Layout</h1>
-      <div>Token: {session?.token}</div>
+      <div className={styles.logo}>
+        <LogoPanel />
+      </div>
+      <div className={styles.header}>header</div>
+      <div className={styles.menu}>menu</div>
+      <div className={styles.content}>content</div>
     </div>
   );
 };

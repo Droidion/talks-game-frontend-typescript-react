@@ -1,0 +1,24 @@
+@use "../../styles/backgrounds";
+@use "../../styles/colors";
+
+.wrapper {
+  align-items: center;
+  background: backgrounds.$gray-gradient;
+  border-radius: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+}
+
+.name {
+  color: colors.$main-font-color-on-bright;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 0.6rem;
+}
+
+.url {
+  color: colors.$main-font-color-on-bright-dimmed;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
