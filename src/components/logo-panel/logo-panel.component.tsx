@@ -13,7 +13,7 @@ const LogoPanel: React.FC = () => {
       </div>
       <div className={styles.name}>{t("Talks Planet")}</div>
       <div className={styles.url}>
-        <a href="http://timseminar.ru/" target="_blank">
+        <a href="http://timseminar.ru/" target="_blank" rel="noopener noreferrer">
           timseminar.ru
         </a>
       </div>

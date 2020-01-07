@@ -1,0 +1,6 @@
+@use "../../styles/colors";
+
+.wrapper {
+  color: colors.$main-font-color-on-bright;
+  text-align: right;
+}
