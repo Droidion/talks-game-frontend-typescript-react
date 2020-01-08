@@ -7,20 +7,31 @@ import InputPassword from "../../components/input-password/input-password.compon
 import { setSession } from "../../redux/session/session.actions";
 import ISession from "../../types/ISession";
 import styles from "./page-signin.module.scss";
+import fetchGraphQL from "../../fetchGraphQL";
 
 const PageSignin: React.FC<ConnectedProps<typeof connector> &
   RouteComponentProps> = ({ setSession, history }) => {
   const { t } = useTranslation();
   const handlePassword = (password: string) => {
-    setSession({
-      token: password,
-      team_number: 1,
-      team_type: "foo",
-      is_commander: false,
-      created_at: "foo",
-      updated_at: "foo",
-    });
-    history.push("/");
+    fetchGraphQL(`
+      query AuthQuery {
+        signin(login: "supplier1", password: "supplier1") {
+          token
+          teamNumber
+          teamType
+          isCommander
+          createdAt
+          updatedAt
+        }        
+      }
+    `)
+      .then((response) => {
+        setSession(response.data.signin);
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className={styles.wrapper}>

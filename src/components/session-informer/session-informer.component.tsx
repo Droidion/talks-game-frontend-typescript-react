@@ -15,7 +15,7 @@ const SessionInformer: React.FC<ConnectedProps<typeof connector>> = ({
   return session ? (
     <div className={styles.wrapper}>
       <div>
-        {t("Team")} {session.team_number}, {t("Token")} {session.token}
+        {t("Team")} {session.teamNumber}, {t("Token")} {session.token}
       </div>
       <button onClick={emptySession}>{t("Sign out")}</button>
     </div>
