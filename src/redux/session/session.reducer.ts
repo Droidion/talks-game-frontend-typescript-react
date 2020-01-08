@@ -6,14 +6,7 @@ import {
 } from "../../types/SessionActionTypes";
 
 const INITIAL_STATE: ISessionState = {
-  session: {
-    token: "foo",
-    team_number: 1,
-    team_type: "foo",
-    is_commander: false,
-    created_at: "foo",
-    updated_at: "foo",
-  },
+  session: null,
 };
 
 const sessionReducer = (
