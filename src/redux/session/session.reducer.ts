@@ -1,5 +1,9 @@
 import ISessionState from "../../types/ISessionState";
-import { SET_SESSION, SessionActionTypes } from "../../types/SessionActionTypes";
+import {
+  EMPTY_SESSION,
+  SET_SESSION,
+  SessionActionTypes,
+} from "../../types/SessionActionTypes";
 
 const INITIAL_STATE: ISessionState = {
   session: {
@@ -17,6 +21,11 @@ const sessionReducer = (
   action: SessionActionTypes
 ): ISessionState => {
   switch (action.type) {
+    case EMPTY_SESSION:
+      return {
+        ...state,
+        session: null,
+      };
     case SET_SESSION:
       return {
         ...state,

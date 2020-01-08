@@ -1,5 +1,13 @@
 import ISession from "../../types/ISession";
-import { SET_SESSION, SessionActionTypes } from "../../types/SessionActionTypes";
+import {
+  EMPTY_SESSION,
+  SET_SESSION,
+  SessionActionTypes,
+} from "../../types/SessionActionTypes";
+
+export const emptySession = (): SessionActionTypes => ({
+  type: EMPTY_SESSION,
+});
 
 export const setSession = (session: ISession): SessionActionTypes => ({
   type: SET_SESSION,
