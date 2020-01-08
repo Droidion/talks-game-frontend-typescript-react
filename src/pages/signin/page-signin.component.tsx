@@ -9,10 +9,10 @@ import ISession from "../../types/ISession";
 import styles from "./page-signin.module.scss";
 
 const PageSignin: React.FC<ConnectedProps<typeof connector> &
-  RouteComponentProps> = (props) => {
+  RouteComponentProps> = ({ setSession, history }) => {
   const { t } = useTranslation();
   const handlePassword = (password: string) => {
-    props.setSession({
+    setSession({
       token: password,
       team_number: 1,
       team_type: "foo",
@@ -20,7 +20,7 @@ const PageSignin: React.FC<ConnectedProps<typeof connector> &
       created_at: "foo",
       updated_at: "foo",
     });
-    props.history.push("/");
+    history.push("/");
   };
   return (
     <div className={styles.wrapper}>
