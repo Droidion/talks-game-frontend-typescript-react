@@ -30,11 +30,17 @@ class InputPassword extends React.Component<
   submitPassword = () => {
     this.props.handlePassword(this.state.password);
   };
+  handleKeyPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      this.submitPassword();
+    }
+  };
   render() {
     return (
       <div className={styles.wrapper}>
         <input
           onChange={this.handleChangePassword}
+          onKeyPress={this.handleKeyPressed}
           className={styles.input}
           type="password"
           placeholder={this.props.t("Password")}
