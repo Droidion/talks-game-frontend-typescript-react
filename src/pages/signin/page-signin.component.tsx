@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { connect, ConnectedProps } from "react-redux";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import InputPassword from "../../components/input-password/input-password.component";
 import { setSession } from "../../redux/session/session.actions";

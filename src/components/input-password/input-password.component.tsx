@@ -1,10 +1,9 @@
+import { TFunction } from "i18next";
 import React from "react";
-
-import styles from "./input-password.module.scss";
 import { withTranslation, WithTranslation } from "react-i18next";
 
 import ButtonAuth from "../button-auth/button-auth.component";
-import { i18n, TFunction } from "i18next";
+import styles from "./input-password.module.scss";
 
 interface IInputPasswordProps extends WithTranslation {
   t: TFunction;
