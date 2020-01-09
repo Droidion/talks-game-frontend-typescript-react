@@ -3,11 +3,11 @@ import { useTranslation } from "react-i18next";
 import { connect, ConnectedProps } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
+import Api from "../../api/Api";
 import InputPassword from "../../components/input-password/input-password.component";
 import { setSession } from "../../redux/session/session.actions";
 import ISession from "../../types/ISession";
 import styles from "./page-signin.module.scss";
-import Api from "../../api/Api";
 
 const PageSignin: React.FC<ConnectedProps<typeof connector> &
   RouteComponentProps> = ({ setSession, history }) => {
