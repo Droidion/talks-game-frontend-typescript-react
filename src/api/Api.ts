@@ -1,39 +1,32 @@
 import queries from "./queries";
 
-class Api {
-  readonly headers = {
-    "Content-Type": "application/json",
+const headers = {
+  "Content-Type": "application/json",
+};
+
+const url = process.env.REACT_APP_API_URL;
+
+const graphRequest = (text: string) => {
+  return {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      query: text,
+    }),
   };
-  private url?: string;
-  private queries: { [key: string]: string };
+};
 
-  constructor() {
-    this.url = process.env.REACT_APP_API_URL;
-    this.queries = queries;
+const fetchGraphQL = async (text: string): Promise<any> => {
+  if (url) {
+    const response = await fetch(url, graphRequest(text));
+    return await response.json();
+  } else {
+    return Promise.reject("API URL is undefined");
   }
+};
 
-  private graphRequest(text: string) {
-    return {
-      method: "POST",
-      headers: this.headers,
-      body: JSON.stringify({
-        query: text,
-      }),
-    };
-  }
+const apiAuth = () => {
+  return fetchGraphQL(queries.auth);
+};
 
-  private async fetchGraphQL(text: string): Promise<any> {
-    if (this.url) {
-      const response = await fetch(this.url, this.graphRequest(text));
-      return await response.json();
-    } else {
-      return Promise.reject("API URL is undefined");
-    }
-  }
-
-  public apiAuth() {
-    return this.fetchGraphQL(this.queries.auth);
-  }
-}
-
-export default Api;
+export { apiAuth };

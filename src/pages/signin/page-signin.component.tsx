@@ -1,29 +1,24 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { connect, ConnectedProps } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
-import Api from "../../api/Api";
 import InputPassword from "../../components/input-password/input-password.component";
-import { setSession } from "../../redux/session/session.actions";
-import ISession from "../../types/ISession";
+import { RootState } from "../../redux/root-reducer";
+import { signIn } from "../../redux/session/session.actions";
 import styles from "./page-signin.module.scss";
 
-const PageSignin: React.FC<ConnectedProps<typeof connector> &
-  RouteComponentProps> = ({ setSession, history }) => {
+const PageSignin: React.FC<ConnectedProps<typeof connector>> = ({
+  signIn,
+  session,
+}) => {
   const { t } = useTranslation();
   const handlePassword = (password: string) => {
-    new Api()
-      .apiAuth()
-      .then((response) => {
-        setSession(response.data.signin);
-        history.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    signIn("foo", password);
   };
-  return (
+  return session ? (
+    <Redirect to="/" />
+  ) : (
     <div className={styles.wrapper}>
       <h1>{t("Talks Planet")}</h1>
       <h2>{t("Business Simulation by TIM Group")}</h2>
@@ -33,10 +28,14 @@ const PageSignin: React.FC<ConnectedProps<typeof connector> &
   );
 };
 
+const mapStateToProps = (state: RootState) => ({
+  session: state.session.session,
+});
+
 const mapDispatchToProps = {
-  setSession: (session: ISession) => setSession(session),
+  signIn: (login: string, password: string) => signIn(login, password),
 };
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export default withRouter(connector(PageSignin));
+export default connector(PageSignin);
