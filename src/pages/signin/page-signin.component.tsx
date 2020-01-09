@@ -14,20 +14,7 @@ const PageSignin: React.FC<ConnectedProps<typeof connector> &
   const { t } = useTranslation();
   const handlePassword = (password: string) => {
     new Api()
-      .fetchGraphQL(
-        `
-      query AuthQuery {
-        signin(login: "supplier1", password: "supplier1") {
-          token
-          teamNumber
-          teamType
-          isCommander
-          createdAt
-          updatedAt
-        }        
-      }
-    `
-      )
+      .apiAuth()
       .then((response) => {
         setSession(response.data.signin);
         history.push("/");
