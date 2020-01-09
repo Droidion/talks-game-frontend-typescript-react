@@ -7,13 +7,15 @@ import InputPassword from "../../components/input-password/input-password.compon
 import { setSession } from "../../redux/session/session.actions";
 import ISession from "../../types/ISession";
 import styles from "./page-signin.module.scss";
-import fetchGraphQL from "../../fetchGraphQL";
+import Api from "../../api/Api";
 
 const PageSignin: React.FC<ConnectedProps<typeof connector> &
   RouteComponentProps> = ({ setSession, history }) => {
   const { t } = useTranslation();
   const handlePassword = (password: string) => {
-    fetchGraphQL(`
+    new Api()
+      .fetchGraphQL(
+        `
       query AuthQuery {
         signin(login: "supplier1", password: "supplier1") {
           token
@@ -24,7 +26,8 @@ const PageSignin: React.FC<ConnectedProps<typeof connector> &
           updatedAt
         }        
       }
-    `)
+    `
+      )
       .then((response) => {
         setSession(response.data.signin);
         history.push("/");
