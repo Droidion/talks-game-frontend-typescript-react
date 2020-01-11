@@ -4,6 +4,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 h1 {
@@ -21,4 +22,17 @@ h2 {
   border: 2px solid colors.$highlight-color;
   margin: 2rem 0;
   width: 10rem;
+}
+
+.selectorList {
+  display: flex;
+}
+
+.selectorEl {
+  margin: 0 1rem;
+}
+
+.errorPanel {
+  position: absolute;
+  bottom: -4rem;
 }

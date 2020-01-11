@@ -1,10 +1,23 @@
 import ISession from "../../types/ISession";
 import {
+  EMPTY_AUTH_ERROR,
+  SET_AUTH_ERROR,
   EMPTY_SESSION,
   SET_SESSION,
   SIGN_IN,
   SessionActionTypes,
 } from "../../types/SessionActionTypes";
+
+export const emptyAuthError = (): SessionActionTypes => ({
+  type: EMPTY_AUTH_ERROR,
+});
+
+export const setAuthError = (error: string): SessionActionTypes => ({
+  type: SET_AUTH_ERROR,
+  payload: {
+    error,
+  },
+});
 
 export const emptySession = (): SessionActionTypes => ({
   type: EMPTY_SESSION,

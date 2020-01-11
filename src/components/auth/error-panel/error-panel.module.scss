@@ -1,0 +1,12 @@
+@use '../../../styles/colors';
+
+.errorPanel {
+  align-items: center;
+  background-color: colors.$red-warning;
+  border-radius: 2rem;
+  color: colors.$main-font-color-on-dark;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  padding: 0.8rem;
+}

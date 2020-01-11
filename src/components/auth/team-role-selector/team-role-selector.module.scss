@@ -1,0 +1,30 @@
+@use '../../../styles/colors';
+
+.selector {
+  color: colors.$main-font-color-on-dark;
+  &:hover {
+    color: colors.$highlight-color;
+    cursor: pointer;
+
+    g {
+      fill: colors.$highlight-color;
+    }
+  }
+}
+
+.selected {
+  color: colors.$highlight-color;
+}
+
+.img {
+  height: 4rem;
+  margin: 0 auto;
+  width: 4rem;
+}
+
+.caption {
+  color: inherit;
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  text-align: center;
+}

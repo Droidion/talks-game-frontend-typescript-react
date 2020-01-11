@@ -1,6 +1,6 @@
-const auth = `
+const auth = (login: string, password: string) => `
 query AuthQuery {
-  signin(login: "supplier1", password: "supplier1") {
+  signin(login: "${login}", password: "${password}") {
     token
     teamNumber
     teamType

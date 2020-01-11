@@ -1,0 +1,22 @@
+@use '../../../styles/colors';
+
+.selector {
+  align-items: center;
+  background-color: colors.$plain-bright-background;
+  border-radius: 2rem;
+  color: colors.$main-font-color-on-bright;
+  display: flex;
+  font-size: 2rem;
+  justify-content: center;
+  height: 4rem;
+  width: 4rem;
+
+  &:hover {
+    background-color: colors.$highlight-color;
+    cursor: pointer;
+  }
+}
+
+.selected {
+  background-color: colors.$highlight-color;
+}

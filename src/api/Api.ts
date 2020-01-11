@@ -25,8 +25,8 @@ const fetchGraphQL = async (text: string): Promise<any> => {
   }
 };
 
-const apiAuth = () => {
-  return fetchGraphQL(queries.auth);
+const apiAuth = (login: string, password: string) => {
+  return fetchGraphQL(queries.auth(login, password));
 };
 
 export { apiAuth };

@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { RootState } from "../../../redux/root-reducer";
+import ISessionState from "../../../types/ISessionState";
+import ContentPanel from "../../content-panel/content-panel.component";
+import Header from "../../header/header.component";
+import LogoPanel from "../../logo-panel/logo-panel.component";
 import styles from "./layout-main.module.scss";
-import { RootState } from "../../redux/root-reducer";
-import LogoPanel from "../logo-panel/logo-panel.component";
-import ContentPanel from "../content-panel/content-panel.component";
-import Header from "../header/header.component";
-import ISessionState from "../../types/ISessionState";
 
 const LayoutMain: React.FC<ISessionState> = ({ session }) => {
   return (
