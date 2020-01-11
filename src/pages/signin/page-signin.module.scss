@@ -4,7 +4,6 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 h1 {
@@ -33,6 +32,9 @@ h2 {
 }
 
 .errorPanel {
-  position: absolute;
-  bottom: -4rem;
+  margin-top: 1rem;
+}
+
+.steps {
+  min-height: 12rem;
 }

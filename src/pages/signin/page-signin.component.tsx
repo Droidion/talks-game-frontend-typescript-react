@@ -109,12 +109,14 @@ class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
         <h1>{this.props.t("Talks Planet")}</h1>
         <h2>{this.props.t("Business Simulation by TIM Group")}</h2>
         <div className={styles.separator}></div>
-        {this.stepContent()}
-        {this.props.authError && (
-          <div className={styles.errorPanel}>
-            <ErrorPanel text={this.props.authError} />
-          </div>
-        )}
+        <div className={styles.steps}>
+          {this.stepContent()}
+          {this.props.authError && (
+            <div className={styles.errorPanel}>
+              <ErrorPanel text={this.props.authError} />
+            </div>
+          )}
+        </div>
       </div>
     );
   }
