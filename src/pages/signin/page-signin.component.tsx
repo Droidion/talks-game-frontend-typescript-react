@@ -1,6 +1,7 @@
 import { TFunction } from "i18next";
 import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
+import posed from "react-pose";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
@@ -26,7 +27,13 @@ interface IPageSigninState {
   step: number;
   selectedRole: string;
   selectedNumber: number;
+  isVisible: boolean;
 }
+
+const Box = posed.div({
+  hidden: { opacity: 0, transition: { duration: 300 } },
+  visible: { opacity: 1, transition: { duration: 300 } },
+});
 
 class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
   constructor(props: IPageSigninProps) {
@@ -35,6 +42,7 @@ class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
       step: 1,
       selectedRole: "",
       selectedNumber: 0,
+      isVisible: true,
     };
   }
 
@@ -43,7 +51,10 @@ class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
   };
 
   goNextStep = () => {
-    this.setState({ step: this.state.step + 1 });
+    this.setState({ isVisible: false });
+    setTimeout(() => {
+      this.setState({ step: this.state.step + 1, isVisible: true });
+    }, 300);
   };
 
   setRole = (role: string) => {
@@ -60,7 +71,10 @@ class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
 
   roleSelectors = () => {
     return (
-      <div className={styles.selectorList}>
+      <Box
+        className={styles.selectorList}
+        pose={this.state.isVisible ? "visible" : "hidden"}
+      >
         {["supplier", "consumer"].map((el) => (
           <div key={el} className={styles.selectorEl}>
             <TeamRoleSelector
@@ -70,13 +84,16 @@ class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
             />
           </div>
         ))}
-      </div>
+      </Box>
     );
   };
 
   numberSelectors = () => {
     return (
-      <div className={styles.selectorList}>
+      <Box
+        className={styles.selectorList}
+        pose={this.state.isVisible ? "visible" : "hidden"}
+      >
         {[1, 2, 3, 4, 5].map((num) => (
           <div key={num} className={styles.selectorEl}>
             <TeamNumberSelector
@@ -86,7 +103,7 @@ class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
             />
           </div>
         ))}
-      </div>
+      </Box>
     );
   };
 
@@ -97,7 +114,11 @@ class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
       case 2:
         return this.numberSelectors();
       default:
-        return <InputPassword handlePassword={this.handlePassword} />;
+        return (
+          <Box pose={this.state.isVisible ? "visible" : "hidden"}>
+            <InputPassword handlePassword={this.handlePassword} />
+          </Box>
+        );
     }
   };
 
