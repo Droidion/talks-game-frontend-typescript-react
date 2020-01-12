@@ -1,4 +1,4 @@
-const auth = (login: string, password: string) => `
+const signIn = (login: string, password: string) => `
 query AuthQuery {
   signin(login: "${login}", password: "${password}") {
     token
@@ -11,6 +11,15 @@ query AuthQuery {
 }
 `;
 
+const signOut = (token: string) => `
+query AuthQuery {
+  signout(token: "${token}") {
+    message
+  }        
+}
+`;
+
 export default {
-  auth,
+  signIn,
+  signOut,
 };

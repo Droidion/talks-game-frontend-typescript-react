@@ -1,10 +1,12 @@
 import ISession from "../../types/ISession";
 import {
   EMPTY_AUTH_ERROR,
+  GET_SESSION_FROM_LOCAL_STORAGE,
   SET_AUTH_ERROR,
   EMPTY_SESSION,
   SET_SESSION,
   SIGN_IN,
+  SIGN_OUT,
   SessionActionTypes,
 } from "../../types/SessionActionTypes";
 
@@ -34,4 +36,15 @@ export const signIn = (login: string, password: string): SessionActionTypes => (
     login,
     password,
   },
+});
+
+export const signOut = (token: string): SessionActionTypes => ({
+  type: SIGN_OUT,
+  payload: {
+    token,
+  },
+});
+
+export const getSessionFromLocalStorage = (): SessionActionTypes => ({
+  type: GET_SESSION_FROM_LOCAL_STORAGE,
 });

@@ -4,12 +4,12 @@ import { connect, ConnectedProps } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { RootState } from "../../redux/root-reducer";
-import { emptySession } from "../../redux/session/session.actions";
+import { signOut } from "../../redux/session/session.actions";
 import styles from "./session-informer.module.scss";
 
 const SessionInformer: React.FC<ConnectedProps<typeof connector>> = ({
   session,
-  emptySession,
+  signOut,
 }) => {
   const { t } = useTranslation();
   return session ? (
@@ -17,7 +17,7 @@ const SessionInformer: React.FC<ConnectedProps<typeof connector>> = ({
       <div>
         {t("Team")} {session.teamNumber}, {t("Token")} {session.token}
       </div>
-      <button onClick={emptySession}>{t("Sign out")}</button>
+      <button onClick={() => signOut(session.token)}>{t("Sign out")}</button>
     </div>
   ) : (
     <Redirect to="/auth/signin" />
@@ -29,7 +29,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  emptySession: () => emptySession(),
+  signOut: (token: string) => signOut(token),
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
