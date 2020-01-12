@@ -1,11 +1,10 @@
 import React from "react";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { useRouteMatch, Route, Switch } from "react-router-dom";
-
-import styles from "./layout-auth.module.scss";
-import Badge from "../../badge/badge.component";
 import PageSignin from "../../../pages/signin/page-signin.component";
+import Badge from "../../badge/badge.component";
 import ChangeLanguage from "../../change-language/change-language.component";
+import styles from "./layout-auth.module.scss";
 
 const LayoutAuth: React.FC = () => {
   let match = useRouteMatch();

@@ -11,14 +11,14 @@ type TeamNumberSelectorProps = {
 };
 
 const TeamNumberSelector: React.FC<TeamNumberSelectorProps> = ({
+  handleClick,
   isSelected,
   number,
-  handleClick,
 }) => {
   return (
     <div
-      onClick={() => handleClick(number)}
       className={classnames(styles.selector, { [styles.selected]: isSelected })}
+      onClick={() => handleClick(number)}
     >
       {number}
     </div>

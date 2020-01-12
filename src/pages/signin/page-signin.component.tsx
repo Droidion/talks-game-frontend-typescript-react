@@ -14,10 +14,10 @@ import ISessionState from "../../types/ISessionState";
 import styles from "./page-signin.module.scss";
 
 interface IPageSigninState {
-  step: number;
-  selectedRole: string;
-  selectedNumber: number;
   isVisible: boolean;
+  selectedNumber: number;
+  selectedRole: string;
+  step: number;
 }
 
 const Box = posed.div({
@@ -32,10 +32,10 @@ class PageSignin extends React.Component<
   constructor(props: ConnectedProps<typeof connector> & WithTranslation) {
     super(props);
     this.state = {
-      step: 1,
-      selectedRole: "",
-      selectedNumber: 0,
       isVisible: true,
+      selectedNumber: 0,
+      selectedRole: "",
+      step: 1,
     };
   }
 

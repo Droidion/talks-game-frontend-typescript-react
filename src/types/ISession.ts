@@ -1,8 +1,8 @@
 export default interface ISession {
-  token: string;
+  createdAt: string;
+  isCommander: boolean;
   teamNumber: number;
   teamType: string;
-  isCommander: boolean;
-  createdAt: string;
+  token: string;
   updatedAt: string;
 }

@@ -1,13 +1,13 @@
 import ISession from "../../types/ISession";
 import {
   EMPTY_AUTH_ERROR,
-  GET_SESSION_FROM_LOCAL_STORAGE,
-  SET_AUTH_ERROR,
   EMPTY_SESSION,
+  GET_SESSION_FROM_LOCAL_STORAGE,
+  SessionActionTypes,
+  SET_AUTH_ERROR,
   SET_SESSION,
   SIGN_IN,
   SIGN_OUT,
-  SessionActionTypes,
 } from "../../types/SessionActionTypes";
 
 export const emptyAuthError = (): SessionActionTypes => ({

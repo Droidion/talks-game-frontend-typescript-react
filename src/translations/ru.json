@@ -1,14 +1,14 @@
 {
   "translation": {
-    "Talks Planet": "Планета Переговоров",
-    "Password": "Пароль",
     "Business Simulation by TIM Group": "Деловая игра от Группы ТИМ",
+    "Consumer": "Заказчик",
+    "Password": "Пароль",
     "Sign in": "Войти",
-    "Trainings and Simulations": "Тренинги и имитационное моделирование",
+    "Sign out": "Выйти",
+    "Supplier": "Поставщик",
+    "Talks Planet": "Планета Переговоров",
     "Team": "Команда",
     "Token": "Токен",
-    "Sign out": "Выйти",
-    "Consumer": "Заказчик",
-    "Supplier": "Поставщик"
+    "Trainings and Simulations": "Тренинги и имитационное моделирование"
   }
 }

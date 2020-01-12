@@ -2,12 +2,12 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { apiSignIn, apiSignOut } from "../../api/api";
 import localforage from "localforage";
 import {
+  EMPTY_SESSION,
+  GET_SESSION_FROM_LOCAL_STORAGE,
   SET_AUTH_ERROR,
   SET_SESSION,
   SIGN_IN,
   SIGN_OUT,
-  EMPTY_SESSION,
-  GET_SESSION_FROM_LOCAL_STORAGE,
   SignInAction,
   SignOutAction,
 } from "../../types/SessionActionTypes";

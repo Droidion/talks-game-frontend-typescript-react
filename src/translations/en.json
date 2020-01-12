@@ -1,14 +1,14 @@
 {
   "translation": {
-    "Talks Planet": "Talks Planet",
-    "Password": "Password",
     "Business Simulation by TIM Group": "Business Simulation by TIM Group",
+    "Consumer": "Consumer",
+    "Password": "Password",
     "Sign in": "Sign in",
-    "Trainings and Simulations": "Trainings and Simulations",
+    "Sign out": "Sign out",
+    "Supplier": "Supplier",
+    "Talks Planet": "Talks Planet",
     "Team": "Team",
     "Token": "Token",
-    "Sign out": "Sign out",
-    "Consumer": "Consumer",
-    "Supplier": "Supplier"
+    "Trainings and Simulations": "Trainings and Simulations"
   }
 }

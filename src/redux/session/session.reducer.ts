@@ -1,10 +1,10 @@
 import ISessionState from "../../types/ISessionState";
 import {
   EMPTY_AUTH_ERROR,
-  SET_AUTH_ERROR,
   EMPTY_SESSION,
-  SET_SESSION,
   SessionActionTypes,
+  SET_AUTH_ERROR,
+  SET_SESSION,
 } from "../../types/SessionActionTypes";
 
 const INITIAL_STATE: ISessionState = {
