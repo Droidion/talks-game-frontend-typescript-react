@@ -2,12 +2,13 @@
 
 .btn {
   background-color: colors.$plain-bright-background;
-  border: 0;
   border-radius: 1.1rem;
+  border: 0;
   color: colors.$main-font-color-on-bright;
   font-size: 1.1rem;
   font-weight: 500;
   height: 2.2rem;
+  min-width: 6rem;
   padding: 0 0.8rem;
   text-transform: uppercase;
 
