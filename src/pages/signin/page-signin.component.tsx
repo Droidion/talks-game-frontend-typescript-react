@@ -9,9 +9,10 @@ import InputPassword from "../../components/auth/input-password/input-password.c
 import TeamNumberSelector from "../../components/auth/team-number-selector/team-number-selector.component";
 import TeamRoleSelector from "../../components/auth/team-role-selector/team-role-selector.component";
 import { RootState } from "../../redux/root-reducer";
-import { signIn } from "../../redux/session/session.actions";
+import { signIn, emptyAuthError } from "../../redux/session/session.actions";
 import ISessionState from "../../types/ISessionState";
 import styles from "./page-signin.module.scss";
+import ButtonAuth from "../../components/auth/button-auth/button-auth.component";
 
 interface IPageSigninState {
   isVisible: boolean;
@@ -50,6 +51,14 @@ class PageSignin extends React.Component<
     }, 300);
   };
 
+  goPrevStep = () => {
+    this.setState({ isVisible: false });
+    setTimeout(() => {
+      this.props.emptyAuthError();
+      this.setState({ step: this.state.step - 1, isVisible: true });
+    }, 300);
+  };
+
   setRole = (role: string) => {
     this.setState({ selectedRole: role });
     this.goNextStep();
@@ -61,6 +70,18 @@ class PageSignin extends React.Component<
   };
 
   composeLogin = (): string => this.state.selectedRole + this.state.selectedNumber;
+
+  backButton = () => {
+    return (
+      <div className={styles.buttonBack}>
+        <ButtonAuth
+          text={this.props.t("Back")}
+          isLoading={false}
+          handleClick={() => this.goPrevStep()}
+        />
+      </div>
+    );
+  };
 
   roleSelectors = () => {
     return (
@@ -84,18 +105,38 @@ class PageSignin extends React.Component<
   numberSelectors = () => {
     return (
       <Box
-        className={styles.selectorList}
+        className={styles.selectorGroup}
         pose={this.state.isVisible ? "visible" : "hidden"}
       >
-        {[1, 2, 3, 4, 5].map((num) => (
-          <div key={num} className={styles.selectorEl}>
-            <TeamNumberSelector
-              handleClick={this.setNumber}
-              isSelected={false}
-              number={num}
-            />
+        <div className={styles.selectorList}>
+          {[1, 2, 3, 4, 5].map((num) => (
+            <div key={num} className={styles.selectorEl}>
+              <TeamNumberSelector
+                handleClick={this.setNumber}
+                isSelected={false}
+                number={num}
+              />
+            </div>
+          ))}
+        </div>
+        {this.backButton()}
+      </Box>
+    );
+  };
+
+  passwordInput = () => {
+    return (
+      <Box
+        className={styles.selectorGroup}
+        pose={this.state.isVisible ? "visible" : "hidden"}
+      >
+        <InputPassword handlePassword={this.handlePassword} />
+        {this.props.authError && (
+          <div className={styles.errorPanel}>
+            <ErrorPanel text={this.props.authError} />
           </div>
-        ))}
+        )}
+        {this.backButton()}
       </Box>
     );
   };
@@ -107,11 +148,7 @@ class PageSignin extends React.Component<
       case 2:
         return this.numberSelectors();
       default:
-        return (
-          <Box pose={this.state.isVisible ? "visible" : "hidden"}>
-            <InputPassword handlePassword={this.handlePassword} />
-          </Box>
-        );
+        return this.passwordInput();
     }
   };
 
@@ -123,14 +160,7 @@ class PageSignin extends React.Component<
         <h1>{this.props.t("Talks Planet")}</h1>
         <h2>{this.props.t("Business Simulation by TIM Group")}</h2>
         <div className={styles.separator}></div>
-        <div className={styles.steps}>
-          {this.stepContent()}
-          {this.props.authError && (
-            <div className={styles.errorPanel}>
-              <ErrorPanel text={this.props.authError} />
-            </div>
-          )}
-        </div>
+        <div className={styles.steps}>{this.stepContent()}</div>
       </div>
     );
   }
@@ -142,6 +172,7 @@ const mapStateToProps = (state: RootState): ISessionState => ({
 });
 
 const mapDispatchToProps = {
+  emptyAuthError: () => emptyAuthError(),
   signIn: (login: string, password: string) => signIn(login, password),
 };
 
