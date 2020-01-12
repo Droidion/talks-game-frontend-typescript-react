@@ -1,8 +1,7 @@
-import { TFunction } from "i18next";
 import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import posed from "react-pose";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import ErrorPanel from "../../components/auth/error-panel/error-panel.component";
@@ -11,17 +10,8 @@ import TeamNumberSelector from "../../components/auth/team-number-selector/team-
 import TeamRoleSelector from "../../components/auth/team-role-selector/team-role-selector.component";
 import { RootState } from "../../redux/root-reducer";
 import { signIn } from "../../redux/session/session.actions";
-import ISession from "../../types/ISession";
 import ISessionState from "../../types/ISessionState";
-import { SessionActionTypes } from "../../types/SessionActionTypes";
 import styles from "./page-signin.module.scss";
-
-interface IPageSigninProps extends WithTranslation {
-  t: TFunction;
-  signIn: (login: string, password: string) => SessionActionTypes;
-  session: ISession | null;
-  authError: string | null;
-}
 
 interface IPageSigninState {
   step: number;
@@ -35,8 +25,11 @@ const Box = posed.div({
   visible: { opacity: 1, transition: { duration: 300 } },
 });
 
-class PageSignin extends React.Component<IPageSigninProps, IPageSigninState> {
-  constructor(props: IPageSigninProps) {
+class PageSignin extends React.Component<
+  ConnectedProps<typeof connector> & WithTranslation,
+  IPageSigninState
+> {
+  constructor(props: ConnectedProps<typeof connector> & WithTranslation) {
     super(props);
     this.state = {
       step: 1,

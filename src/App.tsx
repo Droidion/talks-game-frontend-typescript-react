@@ -1,16 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import LayoutAuth from "./components/layouts/layout-auth/layout-auth.component";
 import LayoutMain from "./components/layouts/layout-main/layout-main.component";
 import { getSessionFromLocalStorage } from "./redux/session/session.actions";
 
-interface IAppProps {
-  getSessionFromLocalStorage: () => void;
-}
-
-class App extends React.Component<IAppProps> {
+class App extends React.Component<ConnectedProps<typeof connector>> {
   componentDidMount() {
     this.props.getSessionFromLocalStorage();
   }
@@ -30,4 +26,6 @@ const mapDispatchToProps = {
   getSessionFromLocalStorage: () => getSessionFromLocalStorage(),
 };
 
-export default connect(null, mapDispatchToProps)(App);
+const connector = connect(null, mapDispatchToProps);
+
+export default connector(App);

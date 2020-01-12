@@ -1,16 +1,13 @@
-import { TFunction } from "i18next";
 import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 
 import ButtonAuth from "../button-auth/button-auth.component";
 import styles from "./input-password.module.scss";
 import { emptyAuthError } from "../../../redux/session/session.actions";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 
 interface IInputPasswordProps extends WithTranslation {
-  t: TFunction;
   handlePassword: Function;
-  emptyAuthError: () => void;
 }
 
 interface IInputPasswordState {
@@ -19,10 +16,12 @@ interface IInputPasswordState {
 }
 
 class InputPassword extends React.Component<
-  IInputPasswordProps,
+  ConnectedProps<typeof connector> & WithTranslation & IInputPasswordProps,
   IInputPasswordState
 > {
-  constructor(props: IInputPasswordProps) {
+  constructor(
+    props: ConnectedProps<typeof connector> & WithTranslation & IInputPasswordProps
+  ) {
     super(props);
     this.state = {
       errorEmptied: false,
