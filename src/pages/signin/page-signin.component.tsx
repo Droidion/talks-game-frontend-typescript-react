@@ -178,4 +178,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
+/**
+ * Page where user can sign in
+ *
+ * @visibleName PageSignin
+ */
 export default connector(withTranslation()(PageSignin));

@@ -6,6 +6,11 @@ import Badge from "../../badge/badge.component";
 import ChangeLanguage from "../../change-language/change-language.component";
 import styles from "./layout-auth.module.scss";
 
+/**
+ * Layout for authentication
+ *
+ * @visibleName LayoutAuth
+ */
 const LayoutAuth: React.FC = () => {
   let match = useRouteMatch();
   return (

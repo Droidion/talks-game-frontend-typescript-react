@@ -3,6 +3,11 @@ import { useTranslation } from "react-i18next";
 
 import styles from "./change-language.module.scss";
 
+/**
+ * Switcher between languages
+ *
+ * @visibleName ChangeLanguage
+ */
 const ChangeLanguage: React.FC = () => {
   const { i18n } = useTranslation();
   const changeLanguage = (lng: string) => {

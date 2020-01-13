@@ -29,4 +29,9 @@ const mapStateToProps = (state: RootState) => ({
   session: state.session.session,
 });
 
+/**
+ * Layout for main game after authentication
+ *
+ * @visibleName LayoutMain
+ */
 export default connect(mapStateToProps)(LayoutMain);
