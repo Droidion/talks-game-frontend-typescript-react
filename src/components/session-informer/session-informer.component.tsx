@@ -34,4 +34,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
+/**
+ * Information about signed in user
+ *
+ * @visibleName SessionInformer
+ */
 export default connector(SessionInformer);

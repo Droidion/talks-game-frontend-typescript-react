@@ -7,11 +7,19 @@ import { ReactComponent as Refinery } from "./refinery.svg";
 import styles from "./team-role-selector.module.scss";
 
 type TeamRoleSelectorProps = {
+  /** Handle click event by user */
   handleClick: (role: string) => void;
+  /** Is this instance selected. Currently not used */
   isSelected: boolean;
+  /** Name of the team role */
   role: string;
 };
 
+/**
+ * Selector for a team role
+ *
+ * @visibleName TeamRoleSelector
+ */
 const TeamRoleSelector: React.FC<TeamRoleSelectorProps> = ({
   handleClick,
   isSelected,

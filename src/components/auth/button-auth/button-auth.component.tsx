@@ -14,6 +14,8 @@ type ButtonAuthProps = {
 
 /**
  * Button with rounded corners used only on authentication layout with dark background
+ *
+ * @visibleName ButtonAuth
  */
 class ButtonAuth extends React.Component<ButtonAuthProps> {
   constructor(props: ButtonAuthProps) {

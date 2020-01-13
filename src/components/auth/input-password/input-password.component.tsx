@@ -8,6 +8,7 @@ import styles from "./input-password.module.scss";
 import { RootState } from "../../../redux/root-reducer";
 
 interface IInputPasswordProps extends WithTranslation {
+  /** Event handler when user clicks the button */
   handlePassword: (password: string) => void;
 }
 
@@ -86,4 +87,9 @@ const mapStateToProps = (state: RootState) => ({
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
+/**
+ * Input field with a button of a password type. Used in the authentication layout
+ *
+ * @visibleName InputPassword
+ */
 export default connector(withTranslation()(InputPassword));
