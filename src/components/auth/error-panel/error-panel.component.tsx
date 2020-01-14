@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./error-panel.module.scss";
 
-type ErrorPanelProps = {
+type Props = {
   /** Error text */
   text: string;
 };
@@ -12,7 +12,7 @@ type ErrorPanelProps = {
  *
  * @visibleName ErrorPanel
  */
-const ErrorPanel: React.FC<ErrorPanelProps> = ({ text }) => {
+const ErrorPanel: React.FC<Props> = ({ text }) => {
   return <div className={styles.errorPanel}>{text}</div>;
 };
 

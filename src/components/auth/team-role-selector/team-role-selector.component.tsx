@@ -6,7 +6,7 @@ import { ReactComponent as Oilrig } from "./oilrig.svg";
 import { ReactComponent as Refinery } from "./refinery.svg";
 import styles from "./team-role-selector.module.scss";
 
-type TeamRoleSelectorProps = {
+type Props = {
   /** Handle click event by user */
   handleClick: (role: string) => void;
   /** Is this instance selected. Currently not used */
@@ -20,13 +20,11 @@ type TeamRoleSelectorProps = {
  *
  * @visibleName TeamRoleSelector
  */
-const TeamRoleSelector: React.FC<TeamRoleSelectorProps> = ({
-  handleClick,
-  isSelected,
-  role,
-}) => {
+const TeamRoleSelector: React.FC<Props> = ({ handleClick, isSelected, role }) => {
+  // Role icon
   const image = role === "supplier" ? <Oilrig /> : <Refinery />;
   const { t } = useTranslation();
+  // Get human readable role name by its code
   const roleName = (roleCode: string) => {
     switch (roleCode) {
       case "supplier":

@@ -4,12 +4,12 @@ import classnames from "classnames";
 
 import styles from "./team-number-selector.module.scss";
 
-type TeamNumberSelectorProps = {
-  /** Should loading indicator be shown */
+type Props = {
+  /** Handle user clicking on a selector item */
   handleClick: (num: number) => void;
   /** Is this instance selected. Currently not used */
   isSelected: boolean;
-  /** Name of the team role */
+  /** Team number */
   number: number;
 };
 
@@ -18,7 +18,7 @@ type TeamNumberSelectorProps = {
  *
  * @visibleName TeamNumberSelector
  */
-const TeamNumberSelector: React.FC<TeamNumberSelectorProps> = ({
+const TeamNumberSelector: React.FC<Props> = ({
   handleClick,
   isSelected,
   number,

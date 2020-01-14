@@ -1,14 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
 
-import { RootState } from "../../../redux/root-reducer";
 import ISessionState from "../../../types/ISessionState";
 import ContentPanel from "../../content-panel/content-panel.component";
 import Header from "../../header/header.component";
 import LogoPanel from "../../logo-panel/logo-panel.component";
 import styles from "./layout-main.module.scss";
 
-const LayoutMain: React.FC<ISessionState> = ({ session }) => {
+/**
+ * Layout for main game after authentication
+ *
+ * @visibleName LayoutMain
+ */
+const LayoutMain: React.FC<ISessionState> = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
@@ -25,13 +28,4 @@ const LayoutMain: React.FC<ISessionState> = ({ session }) => {
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  session: state.session.session,
-});
-
-/**
- * Layout for main game after authentication
- *
- * @visibleName LayoutMain
- */
-export default connect(mapStateToProps)(LayoutMain);
+export default LayoutMain;

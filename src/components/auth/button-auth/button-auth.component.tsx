@@ -24,20 +24,14 @@ class ButtonAuth extends React.Component<ButtonAuthProps> {
       isLoading: false,
     };
   }
-  handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    this.props.handleClick(e);
-  };
   render() {
+    const { isLoading, text, handleClick } = this.props;
     return (
-      <button
-        className={styles.btn}
-        disabled={this.props.isLoading}
-        onClick={this.handleClick}
-      >
-        {this.props.isLoading ? (
-          <ClipLoader size={20} color={"#2c2c2c"} loading={this.props.isLoading} />
+      <button className={styles.btn} disabled={isLoading} onClick={handleClick}>
+        {isLoading ? (
+          <ClipLoader size={20} color={"#2c2c2c"} loading={isLoading} />
         ) : (
-          this.props.text
+          text
         )}
       </button>
     );
