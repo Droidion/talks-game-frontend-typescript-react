@@ -1,4 +1,4 @@
-# Frondend for Talks Planet business simulation
+# Frontend for Talks Planet business simulation
 
 Talks Planet is a business simulation of several companies that simultaneously compete for market share and need to negotiate deals.
 
