@@ -14,22 +14,25 @@ import ISessionState from "../../types/ISessionState";
 import styles from "./page-signin.module.scss";
 import ButtonAuth from "../../components/auth/button-auth/button-auth.component";
 
-interface IPageSigninState {
+interface State {
+  /** Visibility status of sign in step content */
   isVisible: boolean;
+  /** Selected team number */
   selectedNumber: number;
+  /** Selected team role */
   selectedRole: string;
+  /** Sign in step for showing different sign in control elements */
   step: number;
 }
+
+type Props = ConnectedProps<typeof connector> & WithTranslation;
 
 const Box = posed.div({
   hidden: { opacity: 0, transition: { duration: 300 } },
   visible: { opacity: 1, transition: { duration: 300 } },
 });
 
-class PageSignin extends React.Component<
-  ConnectedProps<typeof connector> & WithTranslation,
-  IPageSigninState
-> {
+class PageSignin extends React.Component<Props, State> {
   constructor(props: ConnectedProps<typeof connector> & WithTranslation) {
     super(props);
     this.state = {
@@ -40,55 +43,65 @@ class PageSignin extends React.Component<
     };
   }
 
+  /** Fire sign in action when user submits password */
   handlePassword = (password: string) => {
     this.props.signIn(this.composeLogin(), password);
   };
 
-  goNextStep = () => {
+  /** Change step and apply animation */
+  moveStep = (timeoutCallback: Function) => {
     this.setState({ isVisible: false });
-    setTimeout(() => {
-      this.setState({ step: this.state.step + 1, isVisible: true });
-    }, 300);
+    setTimeout(timeoutCallback, 300);
   };
 
+  /** Go one step further */
+  goNextStep = () => {
+    this.moveStep(() => {
+      this.setState({ step: this.state.step + 1, isVisible: true });
+    });
+  };
+
+  /** Go one step earlier */
   goPrevStep = () => {
-    this.setState({ isVisible: false });
-    setTimeout(() => {
+    this.moveStep(() => {
       this.props.emptyAuthError();
       this.setState({ step: this.state.step - 1, isVisible: true });
-    }, 300);
+    });
   };
 
+  /** Set team role to state and move to next step */
   setRole = (role: string) => {
     this.setState({ selectedRole: role });
     this.goNextStep();
   };
 
+  /** Set team number to state and move to next step */
   setNumber = (num: number) => {
     this.setState({ selectedNumber: num });
     this.goNextStep();
   };
 
+  /** Construct login from team role and team number */
   composeLogin = (): string => this.state.selectedRole + this.state.selectedNumber;
 
+  /** Back button to return one step back */
   backButton = () => {
     return (
       <div className={styles.buttonBack}>
         <ButtonAuth
-          text={this.props.t("Back")}
-          isLoading={false}
           handleClick={() => this.goPrevStep()}
+          isLoading={false}
+          text={this.props.t("Back")}
         />
       </div>
     );
   };
 
+  /** Step with team role selection */
   roleSelectors = () => {
+    const { isVisible } = this.state;
     return (
-      <Box
-        className={styles.selectorList}
-        pose={this.state.isVisible ? "visible" : "hidden"}
-      >
+      <Box className={styles.selectorList} pose={isVisible ? "visible" : "hidden"}>
         {["supplier", "consumer"].map((el) => (
           <div key={el} className={styles.selectorEl}>
             <TeamRoleSelector
@@ -102,12 +115,11 @@ class PageSignin extends React.Component<
     );
   };
 
+  /** Step with team number selection */
   numberSelectors = () => {
+    const { isVisible } = this.state;
     return (
-      <Box
-        className={styles.selectorGroup}
-        pose={this.state.isVisible ? "visible" : "hidden"}
-      >
+      <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
         <div className={styles.selectorList}>
           {[1, 2, 3, 4, 5].map((num) => (
             <div key={num} className={styles.selectorEl}>
@@ -124,16 +136,16 @@ class PageSignin extends React.Component<
     );
   };
 
+  /** Last step with password input */
   passwordInput = () => {
+    const { authError } = this.props;
+    const { isVisible } = this.state;
     return (
-      <Box
-        className={styles.selectorGroup}
-        pose={this.state.isVisible ? "visible" : "hidden"}
-      >
+      <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
         <InputPassword handlePassword={this.handlePassword} />
-        {this.props.authError && (
+        {authError && (
           <div className={styles.errorPanel}>
-            <ErrorPanel text={this.props.authError} />
+            <ErrorPanel text={authError} />
           </div>
         )}
         {this.backButton()}
@@ -141,6 +153,7 @@ class PageSignin extends React.Component<
     );
   };
 
+  /** Decide what to show on each sign in step */
   stepContent = () => {
     switch (this.state.step) {
       case 1:
@@ -153,12 +166,13 @@ class PageSignin extends React.Component<
   };
 
   render() {
-    return this.props.session ? (
+    const { session, t } = this.props;
+    return session ? (
       <Redirect to="/" />
     ) : (
       <div className={styles.wrapper}>
-        <h1>{this.props.t("Talks Planet")}</h1>
-        <h2>{this.props.t("Business Simulation by TIM Group")}</h2>
+        <h1>{t("Talks Planet")}</h1>
+        <h2>{t("Business Simulation by TIM Group")}</h2>
         <div className={styles.separator}></div>
         <div className={styles.steps}>{this.stepContent()}</div>
       </div>
