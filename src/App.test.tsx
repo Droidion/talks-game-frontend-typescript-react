@@ -7,7 +7,7 @@ import { render } from "@testing-library/react";
 import App from "./App";
 import store from "./redux/store";
 
-test("renders learn react link", () => {
+test("renders a div", () => {
   const { container } = render(
     <Provider store={store}>
       <BrowserRouter>
@@ -15,7 +15,6 @@ test("renders learn react link", () => {
       </BrowserRouter>
     </Provider>
   );
-  // Basically, we're checking that our app renders some div
   const el = container.querySelector("div");
   expect(el).toBeInTheDocument();
 });
