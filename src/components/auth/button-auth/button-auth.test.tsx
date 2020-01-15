@@ -8,8 +8,8 @@ test("button has text", () => {
   const { getByText } = render(
     <ButtonAuth handleClick={() => {}} isLoading={false} text={"A button"} />
   );
-  const text = getByText("A button");
-  expect(text).toBeInTheDocument();
+  const button = getByText("A button");
+  expect(button).toBeInTheDocument();
 });
 
 test("button has loader", () => {
