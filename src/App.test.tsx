@@ -1,9 +1,20 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import { render } from "@testing-library/react";
+
+import App from "./App";
+import store from "./redux/store";
+
+test("renders learn react link", () => {
+  const { container } = render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  );
+  const el = container.querySelector("div");
+  expect(el).toBeInTheDocument();
 });
