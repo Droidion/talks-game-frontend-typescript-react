@@ -58,6 +58,7 @@ class InputPassword extends React.Component<AllProps, IInputPasswordState> {
     return (
       <div className={styles.wrapper}>
         <input
+          data-testid="inputPassword"
           onChange={this.handleChangePassword}
           onKeyPress={this.handleKeyPressed}
           className={styles.input}
