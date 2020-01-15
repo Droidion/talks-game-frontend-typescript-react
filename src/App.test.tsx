@@ -15,6 +15,7 @@ test("renders learn react link", () => {
       </BrowserRouter>
     </Provider>
   );
+  // Basically, we're checking that our app renders some div
   const el = container.querySelector("div");
   expect(el).toBeInTheDocument();
 });
