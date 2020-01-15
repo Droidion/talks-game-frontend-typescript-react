@@ -29,7 +29,9 @@ class ButtonAuth extends React.Component<ButtonAuthProps> {
     return (
       <button className={styles.btn} disabled={isLoading} onClick={handleClick}>
         {isLoading ? (
-          <ClipLoader size={20} color={"#2c2c2c"} loading={isLoading} />
+          <div data-testid="clipLoader" className={styles.loader}>
+            <ClipLoader size={20} color={"#2c2c2c"} loading={isLoading} />
+          </div>
         ) : (
           text
         )}
