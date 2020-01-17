@@ -17,7 +17,9 @@ const SessionInformer: React.FC<ConnectedProps<typeof connector>> = ({
       <div>
         {t("Team")} {session.teamNumber}, {t("Token")} {session.token}
       </div>
-      <button onClick={() => signOut(session.token)}>{t("Sign out")}</button>
+      <button data-testid={"signOutButton"} onClick={() => signOut(session.token)}>
+        {t("Sign out")}
+      </button>
     </div>
   ) : (
     <Redirect to="/auth/signin" />

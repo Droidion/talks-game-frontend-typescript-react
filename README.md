@@ -68,3 +68,11 @@ Run React Styleguidist server.
 ### `yarn styleguide:build`
 
 Build html React Styleguidist documentation.
+
+### `yarn cypress`
+
+Run e2e tests using Cypress.
+
+Make sure that you have a running instance of local dev frontend and backend servers.
+
+Make sure you set correct frontend server url in `.env` file.

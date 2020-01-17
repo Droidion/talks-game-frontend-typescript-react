@@ -13,7 +13,11 @@ type Props = {
  * @visibleName ErrorPanel
  */
 const ErrorPanel: React.FC<Props> = ({ text }) => {
-  return <div className={styles.errorPanel}>{text}</div>;
+  return (
+    <div data-testid={"errorPanel"} className={styles.errorPanel}>
+      {text}
+    </div>
+  );
 };
 
 export default ErrorPanel;

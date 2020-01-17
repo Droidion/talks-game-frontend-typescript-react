@@ -66,7 +66,7 @@ class InputPassword extends React.Component<AllProps, IInputPasswordState> {
           type="password"
           placeholder={this.props.t("Password")}
         />
-        <div className={styles.btnContainer}>
+        <div data-testid="buttonAuth" className={styles.btnContainer}>
           <ButtonAuth
             handleClick={this.submitPassword}
             isLoading={this.state.isLoading}

@@ -103,7 +103,7 @@ class PageSignin extends React.Component<Props, State> {
     return (
       <Box className={styles.selectorList} pose={isVisible ? "visible" : "hidden"}>
         {["supplier", "consumer"].map((el) => (
-          <div key={el} className={styles.selectorEl}>
+          <div key={el} data-testid={el} className={styles.selectorEl}>
             <TeamRoleSelector
               handleClick={this.setRole}
               isSelected={false}
@@ -122,7 +122,11 @@ class PageSignin extends React.Component<Props, State> {
       <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
         <div className={styles.selectorList}>
           {[1, 2, 3, 4, 5].map((num) => (
-            <div key={num} className={styles.selectorEl}>
+            <div
+              className={styles.selectorEl}
+              data-testid={"number_" + num}
+              key={num}
+            >
               <TeamNumberSelector
                 handleClick={this.setNumber}
                 isSelected={false}
