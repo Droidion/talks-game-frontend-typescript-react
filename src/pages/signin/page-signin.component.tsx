@@ -13,6 +13,7 @@ import { signIn, emptyAuthError } from "../../redux/session/session.actions";
 import ISessionState from "../../types/ISessionState";
 import styles from "./page-signin.module.scss";
 import ButtonAuth from "../../components/auth/button-auth/button-auth.component";
+import SelectedTeam from "../../components/auth/selected-team/selected-team.component";
 
 interface State {
   /** Visibility status of sign in step content */
@@ -120,6 +121,10 @@ class PageSignin extends React.Component<Props, State> {
     const { isVisible } = this.state;
     return (
       <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
+        <SelectedTeam
+            role={this.state.selectedRole}
+            number={this.state.selectedNumber}
+            />
         <div className={styles.selectorList}>
           {[1, 2, 3, 4, 5].map((num) => (
             <div
@@ -146,6 +151,10 @@ class PageSignin extends React.Component<Props, State> {
     const { isVisible } = this.state;
     return (
       <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
+       <SelectedTeam
+            role={this.state.selectedRole}
+            number={this.state.selectedNumber}
+            />
         <InputPassword handlePassword={this.handlePassword} />
         {authError && (
           <div className={styles.errorPanel}>

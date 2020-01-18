@@ -1,0 +1,13 @@
+@use '../../../styles/colors';
+
+.selectedTeam {
+    color: colors.$highlight-color;
+    display: flex;
+    font-size: 2rem;
+    justify-content: center;
+    margin: 0 0 2rem 0;
+}
+
+.selectedTeamRole {
+  margin: 0 0.5rem 0;
+}
