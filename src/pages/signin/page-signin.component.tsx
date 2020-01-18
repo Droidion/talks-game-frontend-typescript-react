@@ -4,24 +4,25 @@ import posed from "react-pose";
 import { connect, ConnectedProps } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import ButtonAuth from "../../components/auth/button-auth/button-auth.component";
 import ErrorPanel from "../../components/auth/error-panel/error-panel.component";
 import InputPassword from "../../components/auth/input-password/input-password.component";
+import SelectedTeam from "../../components/auth/selected-team/selected-team.component";
 import TeamNumberSelector from "../../components/auth/team-number-selector/team-number-selector.component";
 import TeamRoleSelector from "../../components/auth/team-role-selector/team-role-selector.component";
 import { RootState } from "../../redux/root-reducer";
-import { signIn, emptyAuthError } from "../../redux/session/session.actions";
+import { emptyAuthError, signIn } from "../../redux/session/session.actions";
 import ISessionState from "../../types/ISessionState";
+import TeamRole from "../../types/TeamRole";
 import styles from "./page-signin.module.scss";
-import ButtonAuth from "../../components/auth/button-auth/button-auth.component";
-import SelectedTeam from "../../components/auth/selected-team/selected-team.component";
 
 interface State {
   /** Visibility status of sign in step content */
   isVisible: boolean;
   /** Selected team number */
-  selectedNumber: number;
+  selectedNumber: number | undefined;
   /** Selected team role */
-  selectedRole: string;
+  selectedRole: TeamRole | undefined;
   /** Sign in step for showing different sign in control elements */
   step: number;
 }
@@ -38,15 +39,18 @@ class PageSignin extends React.Component<Props, State> {
     super(props);
     this.state = {
       isVisible: true,
-      selectedNumber: 0,
-      selectedRole: "",
+      selectedNumber: undefined,
+      selectedRole: undefined,
       step: 1,
     };
   }
 
   /** Fire sign in action when user submits password */
   handlePassword = (password: string) => {
-    this.props.signIn(this.composeLogin(), password);
+    const login = this.composeLogin();
+    if (login) {
+      this.props.signIn(login, password);
+    }
   };
 
   /** Change step and apply animation */
@@ -71,7 +75,7 @@ class PageSignin extends React.Component<Props, State> {
   };
 
   /** Set team role to state and move to next step */
-  setRole = (role: string) => {
+  setRole = (role: TeamRole) => {
     this.setState({ selectedRole: role });
     this.goNextStep();
   };
@@ -83,7 +87,10 @@ class PageSignin extends React.Component<Props, State> {
   };
 
   /** Construct login from team role and team number */
-  composeLogin = (): string => this.state.selectedRole + this.state.selectedNumber;
+  composeLogin = (): string | undefined => {
+    if (!this.state.selectedRole || !this.state.selectedNumber) return undefined;
+    return this.state.selectedRole + this.state.selectedNumber;
+  };
 
   /** Back button to return one step back */
   backButton = () => {
@@ -103,7 +110,7 @@ class PageSignin extends React.Component<Props, State> {
     const { isVisible } = this.state;
     return (
       <Box className={styles.selectorList} pose={isVisible ? "visible" : "hidden"}>
-        {["supplier", "consumer"].map((el) => (
+        {[TeamRole.Supplier, TeamRole.Consumer].map((el) => (
           <div key={el} data-testid={el} className={styles.selectorEl}>
             <TeamRoleSelector
               handleClick={this.setRole}
@@ -122,9 +129,9 @@ class PageSignin extends React.Component<Props, State> {
     return (
       <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
         <SelectedTeam
-            role={this.state.selectedRole}
-            number={this.state.selectedNumber}
-            />
+          role={this.state.selectedRole}
+          number={this.state.selectedNumber}
+        />
         <div className={styles.selectorList}>
           {[1, 2, 3, 4, 5].map((num) => (
             <div
@@ -151,10 +158,10 @@ class PageSignin extends React.Component<Props, State> {
     const { isVisible } = this.state;
     return (
       <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
-       <SelectedTeam
-            role={this.state.selectedRole}
-            number={this.state.selectedNumber}
-            />
+        <SelectedTeam
+          role={this.state.selectedRole}
+          number={this.state.selectedNumber}
+        />
         <InputPassword handlePassword={this.handlePassword} />
         {authError && (
           <div className={styles.errorPanel}>

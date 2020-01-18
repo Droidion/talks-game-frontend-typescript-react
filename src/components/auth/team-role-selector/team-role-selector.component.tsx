@@ -1,19 +1,20 @@
-import classnames from 'classnames';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import classnames from "classnames";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-import getRoleNameByCode from '../../../lib/getRoleNameByCode';
-import { ReactComponent as Oilrig } from './oilrig.svg';
-import { ReactComponent as Refinery } from './refinery.svg';
-import styles from './team-role-selector.module.scss';
+import getRoleNameByCode from "../../../lib/getRoleNameByCode";
+import TeamRole from "../../../types/TeamRole";
+import { ReactComponent as Oilrig } from "./oilrig.svg";
+import { ReactComponent as Refinery } from "./refinery.svg";
+import styles from "./team-role-selector.module.scss";
 
 type Props = {
   /** Handle click event by user */
-  handleClick: (role: string) => void;
+  handleClick: (role: TeamRole) => void;
   /** Is this instance selected. Currently not used */
   isSelected: boolean;
   /** Name of the team role */
-  role: string;
+  role: TeamRole;
 };
 
 /**
@@ -23,7 +24,7 @@ type Props = {
  */
 const TeamRoleSelector: React.FC<Props> = ({ handleClick, isSelected, role }) => {
   // Role icon
-  const image = role === "supplier" ? <Oilrig /> : <Refinery />;
+  const image = role === TeamRole.Supplier ? <Oilrig /> : <Refinery />;
   const { t } = useTranslation();
   return (
     <div
