@@ -1,22 +1,15 @@
-import { execute, makePromise, DocumentNode, FetchResult } from "apollo-link";
-import { HttpLink } from "apollo-link-http";
+import { request } from "graphql-request";
 
 /** Make fetch request */
-const fetchGraphQL = async (
-  query: DocumentNode,
+const fetchGraphQL = async <T>(
+  query: string,
   variables: { [name: string]: string }
-): Promise<FetchResult> => {
-  const uri = process.env.REACT_APP_API_URL;
-  const link = new HttpLink({ uri });
+): Promise<T> => {
+  const uri = process.env.REACT_APP_API_URL ?? "";
   try {
-    return await makePromise(
-      execute(link, {
-        query,
-        variables,
-      })
-    );
+    return await request<T>(uri, query, variables);
   } catch (e) {
-    return Promise.reject(e);
+    return Promise.reject(e.response?.errors[0].message ?? "Network error");
   }
 };
 
