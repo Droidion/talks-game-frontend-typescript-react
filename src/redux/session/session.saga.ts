@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { apiSignIn, apiSignOut } from "../../api/api";
+import fetchGraphQL from "../../lib/fetchGraphQL";
+import apiQueries from "../../lib/apiQueries";
 import localforage from "localforage";
 import {
   EMPTY_SESSION,
@@ -29,25 +30,23 @@ function* getSessionFromLocalStorage() {
 function* signIn(action: SignInAction) {
   try {
     // Make a request to backend
-    const response = yield call(
-      apiSignIn,
-      action.payload.login,
-      action.payload.password
-    );
-    if (response.errors && response.errors.length) {
-      // Update state with response error
+    const { errors, data } = yield call(fetchGraphQL, apiQueries.SIGN_IN, {
+      login: action.payload.login,
+      password: action.payload.password,
+    });
+    if (errors?.length > 0) {
       yield put({
         type: SET_AUTH_ERROR,
-        payload: { error: response.errors[0].message },
+        payload: { error: errors[0].message },
       });
     } else {
       // Store session locally in browser storage
-      yield call([localforage, "setItem"], "vinkSession", response.data.signin);
+      yield call([localforage, "setItem"], "vinkSession", data.signin);
       // Store session in Redux state
-      yield put({ type: SET_SESSION, payload: response.data.signin });
+      yield put({ type: SET_SESSION, payload: data.signin });
     }
-  } catch (e) {
-    console.log("Could not sign in: ", e);
+  } catch (error) {
+    console.error("Critical sign in error: ", error);
   }
 }
 
@@ -55,9 +54,11 @@ function* signIn(action: SignInAction) {
 function* signOut(action: SignOutAction) {
   try {
     // Make a request to backend
-    const response = yield call(apiSignOut, action.payload.token);
-    if (response.errors && response.errors.length) {
-      console.log("Could not sign out", response.errors[0].message);
+    const { errors } = yield call(fetchGraphQL, apiQueries.SIGN_OUT, {
+      token: action.payload.token,
+    });
+    if (errors?.length > 0) {
+      console.error(errors[0].message);
     } else {
       // Clear session in local storage
       yield call([localforage, "removeItem"], "vinkSession");
@@ -65,7 +66,7 @@ function* signOut(action: SignOutAction) {
       yield put({ type: EMPTY_SESSION });
     }
   } catch (e) {
-    console.log("Could not sign out: ", e);
+    console.error("Could not sign out", e);
   }
 }
 
