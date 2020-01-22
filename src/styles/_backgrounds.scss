@@ -1,1 +1,27 @@
-$gray-gradient: linear-gradient(180deg, #faffff 0%, #c4c4c4 100%, #cfd0d4 100%);
+@use "./colors";
+$black-gradient-period: linear-gradient(
+  180deg,
+  colors.$shark-2-color 0%,
+  colors.$shark-1-color 100%
+);
+$gray-gradient: linear-gradient(
+  180deg,
+  colors.$twilight-blue-color 0%,
+  colors.$silver-color 100%,
+  colors.$iron-color 100%
+);
+$gray-gradient-period: linear-gradient(
+  180deg,
+  colors.$pale-sky-color 0%,
+  colors.$trout-color 100%
+);
+$green-gradient-period: linear-gradient(
+  180deg,
+  colors.$olivine-color 0%,
+  colors.$hippie-green-color 100%
+);
+$orange-gradient-period: linear-gradient(
+  180deg,
+  colors.$sea-buckthorn-color 0%,
+  colors.$tango-color 100%
+);

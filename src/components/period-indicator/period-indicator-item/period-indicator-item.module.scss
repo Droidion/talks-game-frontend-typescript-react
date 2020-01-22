@@ -1,0 +1,57 @@
+@use "../../../styles/colors";
+@use "../../../styles/backgrounds";
+@use "../../../styles/shadows";
+
+.periodItem {
+  height: 28px;
+  position: relative;
+  width: 88px;
+}
+
+.periodItem:not(:first-child) {
+  margin-left: 4px;
+}
+
+.number {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 26px;
+  margin-left: 11px;
+  text-shadow: shadows.$text-shadow-default;
+}
+
+.future {
+  color: colors.$grey-color;
+}
+
+.back {
+  background: backgrounds.$gray-gradient-period;
+  border-radius: 14px;
+  border: 1px solid colors.$shark-1-color;
+  box-shadow: shadows.$box-shadow-period-1;
+  height: 28px;
+  position: absolute;
+  top: 0;
+  width: 88px;
+  z-index: 1;
+}
+
+.analyse {
+  background: backgrounds.$orange-gradient-period;
+}
+
+.front {
+  background: backgrounds.$black-gradient-period;
+  border-radius: 14px;
+  border: 1px solid colors.$shark-1-color;
+  box-shadow: shadows.$box-shadow-period-2;
+  height: 28px;
+  position: relative;
+  width: 68px;
+  z-index: 2;
+}
+
+.play {
+  background: backgrounds.$green-gradient-period;
+}
