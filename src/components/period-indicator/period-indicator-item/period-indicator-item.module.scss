@@ -22,13 +22,13 @@
 }
 
 .future {
-  color: colors.$grey-color;
+  color: colors.$grey;
 }
 
 .back {
   background: backgrounds.$gray-gradient-period;
   border-radius: 14px;
-  border: 1px solid colors.$shark-1-color;
+  border: 1px solid colors.$black-gradient-start;
   box-shadow: shadows.$box-shadow-period-1;
   height: 28px;
   position: absolute;
@@ -44,7 +44,7 @@
 .front {
   background: backgrounds.$black-gradient-period;
   border-radius: 14px;
-  border: 1px solid colors.$shark-1-color;
+  border: 1px solid colors.$black-gradient-start;
   box-shadow: shadows.$box-shadow-period-2;
   height: 28px;
   position: relative;

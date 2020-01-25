@@ -1,0 +1,53 @@
+@use "../../styles/backgrounds";
+@use "../../styles/colors";
+@use "../../styles/shadows";
+
+.informer {
+  align-items: center;
+  background: backgrounds.$lightgray-gradient;
+  border-radius: 0.31rem;
+  box-shadow: shadows.$box-shadow-informer-1;
+  color: colors.$mine-shaft;
+  font-style: normal;
+  height: 6.15rem;
+  margin: 0 0.9rem 0 0.9rem;
+  padding: 1.1rem 0 0 0;
+  text-align: center;
+  width: 16.15rem;
+
+  &:not(:first-child) {
+    margin-top: 0.9rem;
+  }
+}
+
+.informerImportant {
+  background: backgrounds.$red-gradient;
+  box-shadow: shadows.$box-shadow-informer-2;
+  color: colors.$white;
+  padding: 0.5rem 0 0 0;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 500;
+  height: 1.15rem;
+  line-height: 1.15rem;
+}
+
+.value {
+  font-size: 1.846rem;
+  font-weight: bold;
+  height: 2.15rem;
+  line-height: 2.15rem;
+  margin: 0.7rem 0.3rem 0 0.3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.valueImportant {
+  font-size: 3.7rem;
+  height: 4.3rem;
+  line-height: 4.3rem;
+  margin-top: 0.15rem;
+}
