@@ -1,0 +1,26 @@
+@use "../styles/colors";
+@use "../styles/shadows";
+
+.input {
+  background: colors.$shark;
+  border: 0;
+  box-shadow: shadows.$box-shadow-input;
+  color: colors.$white;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: normal;
+  height: 1.5rem;
+  line-height: 1.15rem;
+  text-align: right;
+  width: 8.7rem;
+  padding: 0.15rem 0.46rem 0 0.46rem;
+
+  &:hover {
+    border: 1px solid colors.$pale-sky;
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid colors.$atlantis;
+  }
+}

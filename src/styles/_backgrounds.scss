@@ -12,7 +12,7 @@ $gray-gradient: linear-gradient(
 );
 $gray-gradient-period: linear-gradient(
   180deg,
-  colors.$pale-sky 0%,
+  colors.$gray-gradient-period-start 0%,
   colors.$trout 100%
 );
 $green-gradient-period: linear-gradient(

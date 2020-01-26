@@ -1,0 +1,11 @@
+@use "../../styles/colors";
+@use "../../styles/input";
+
+.wrapper {
+  color: colors.$main-font-color-on-bright;
+  text-align: right;
+}
+
+input {
+  @extend .input;
+}
