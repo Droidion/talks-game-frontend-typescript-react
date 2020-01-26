@@ -1,0 +1,32 @@
+@use "../../styles/colors";
+@use "../../styles/shadows";
+
+.wrapper {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.item {
+  border: 2px solid transparent;
+  color: colors.$border-for-dark-background;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 3rem;
+  padding-left: 1rem;
+  text-shadow: shadows.$text-shadow-default;
+
+  &:hover {
+    color: colors.$white;
+    cursor: pointer;
+  }
+
+  &.selected {
+    background-color: colors.$dark-background;
+    border: 2px solid colors.$border-for-dark-background;
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+    color: colors.$white;
+    position: relative;
+    width: calc(100% + 2px);
+  }
+}

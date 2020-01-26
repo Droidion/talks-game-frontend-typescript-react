@@ -1,8 +1,7 @@
-@use "../../styles/backgrounds";
-@use "../../styles/colors";
-@use "../../styles/shadows";
+@use './colors';
+@use './shadows';
 
-.wrapper {
+.content-panel {
   background-color: colors.$dark-background;
   border: 2px solid colors.$border-for-dark-background;
   border-radius: 0.4rem;
