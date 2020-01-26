@@ -188,7 +188,7 @@ class PageSignin extends React.Component<Props, State> {
   render() {
     const { session, t } = this.props;
     return session ? (
-      <Redirect to="/" />
+      <Redirect to="/production" />
     ) : (
       <div className={styles.wrapper}>
         <h1>{t("Talks Planet")}</h1>

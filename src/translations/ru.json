@@ -3,8 +3,13 @@
     "Back": "Назад",
     "Business Simulation by TIM Group": "Деловая игра от Группы ТИМ",
     "Consumer": "Заказчик",
+    "Deals": "Сделки",
+    "Finance": "Финансы",
     "Money": "Денежные средства",
     "Password": "Пароль",
+    "Problems": "Проблемы",
+    "Production": "Производство",
+    "Results": "Результаты",
     "Sign in": "Войти",
     "Sign out": "Выйти",
     "Supplier": "Поставщик",
@@ -13,6 +18,7 @@
     "Time Remaining": "До конца периода",
     "Token": "Токен",
     "Trainings and Simulations": "Тренинги и имитационное моделирование",
+    "Upgrades": "Улучшения",
     "User not found": "Пользователь не найден",
     "Wrong password": "Неверный пароль"
   }

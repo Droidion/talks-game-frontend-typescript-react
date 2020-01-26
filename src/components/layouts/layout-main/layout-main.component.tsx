@@ -1,13 +1,20 @@
 import { Decimal } from "decimal.js";
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 
+import PageDeals from "../../../pages/deals/page-deals.component";
+import PageFinance from "../../../pages/finance/page-finance.component";
+import PageProblems from "../../../pages/problems/page-problems.component";
+import PageProduction from "../../../pages/production/page-production.component";
+import PageResults from "../../../pages/results/page-results.component";
+import PageUpgrades from "../../../pages/upgrades/page-upgrades.component";
 import Currency from "../../../types/Currency";
 import InformerType from "../../../types/InformerType";
 import ISessionState from "../../../types/ISessionState";
-import ContentPanel from "../../content-panel/content-panel.component";
 import Header from "../../header/header.component";
 import Informer from "../../informer/informer.component";
 import LogoPanel from "../../logo-panel/logo-panel.component";
+import MainMenu from "../../main-menu/main-menu.component";
 import styles from "./layout-main.module.scss";
 
 /**
@@ -25,7 +32,7 @@ const LayoutMain: React.FC<ISessionState> = () => {
         <Header />
       </div>
       <div className={styles.menu}>
-        menu
+        <MainMenu />
         <div className={styles.informerList}>
           <Informer
             currency={Currency.Rouble}
@@ -48,7 +55,26 @@ const LayoutMain: React.FC<ISessionState> = () => {
         </div>
       </div>
       <div className={styles.content}>
-        <ContentPanel />
+        <Switch>
+          <Route exact path="/deals">
+            <PageDeals />
+          </Route>
+          <Route exact path="/finance">
+            <PageFinance />
+          </Route>
+          <Route exact path="/problems">
+            <PageProblems />
+          </Route>
+          <Route exact path="/production">
+            <PageProduction />
+          </Route>
+          <Route exact path="/results">
+            <PageResults />
+          </Route>
+          <Route exact path="/upgrades">
+            <PageUpgrades />
+          </Route>
+        </Switch>
       </div>
     </div>
   );

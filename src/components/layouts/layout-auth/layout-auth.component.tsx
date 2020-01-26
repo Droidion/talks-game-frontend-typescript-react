@@ -12,7 +12,7 @@ import styles from "./layout-auth.module.scss";
  * @visibleName LayoutAuth
  */
 const LayoutAuth: React.FC = () => {
-  let match = useRouteMatch();
+  const match = useRouteMatch();
   return (
     <div className={styles.wrapper}>
       <div className={styles.badge}>
