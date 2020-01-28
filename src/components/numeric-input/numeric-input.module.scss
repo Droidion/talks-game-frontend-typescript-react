@@ -1,6 +1,6 @@
 @use "../../styles/colors";
-@use "../../styles/input";
-
+/*@use "../../styles/input";*/
+@import "../../styles/input";
 .wrapper {
   /* color: colors.$main-font-color-on-bright; */
   text-align: right;
@@ -8,7 +8,6 @@
 }
 
 input {
-  @extend .input;
   margin-right: 1px;
 }
 
