@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { Decimal } from "decimal.js";
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import formatNumbersAsCurrency from "../../lib/formatNumbersAsCurrency";
@@ -18,12 +18,6 @@ type Props = {
   /** Value of informer */
   value: Decimal | string;
 };
-
-/**
- * Informer block
- *
- * @visibleName Informer
- */
 
 const Informer: React.FC<Props> = ({ title, type, value }) => {
   const { t } = useTranslation();
@@ -56,4 +50,9 @@ const Informer: React.FC<Props> = ({ title, type, value }) => {
   );
 };
 
-export default Informer;
+/**
+ * Informer block
+ *
+ * @visibleName Informer
+ */
+export default memo(Informer);

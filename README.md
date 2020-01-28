@@ -18,7 +18,7 @@ This frontend needs a dedicated backend.
 
 Currently there is this backend in Elixir: https://github.com/Droidion/talks_game_backend_elixir
 
-Set API URL in .env file.
+Set REACT_APP_API_URL and REACT_APP_SOCKET_URL in .env file.
 
 ## Available Scripts
 

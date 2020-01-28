@@ -1,5 +1,5 @@
 import { Decimal } from "decimal.js";
-import React from "react";
+import React, { memo } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import PageDeals from "../../../pages/deals/page-deals.component";
@@ -10,19 +10,13 @@ import PageResults from "../../../pages/results/page-results.component";
 import PageUpgrades from "../../../pages/upgrades/page-upgrades.component";
 import Currency from "../../../types/Currency";
 import InformerType from "../../../types/InformerType";
-import ISessionState from "../../../types/ISessionState";
 import Header from "../../header/header.component";
 import Informer from "../../informer/informer.component";
 import LogoPanel from "../../logo-panel/logo-panel.component";
 import MainMenu from "../../main-menu/main-menu.component";
 import styles from "./layout-main.module.scss";
 
-/**
- * Layout for main game after authentication
- *
- * @visibleName LayoutMain
- */
-const LayoutMain: React.FC<ISessionState> = () => {
+const LayoutMain: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
@@ -80,4 +74,9 @@ const LayoutMain: React.FC<ISessionState> = () => {
   );
 };
 
-export default LayoutMain;
+/**
+ * Layout for main game after authentication
+ *
+ * @visibleName LayoutMain
+ */
+export default memo(LayoutMain);

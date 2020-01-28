@@ -2,6 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import fetchGraphQL from "../../lib/fetchGraphQL";
 import apiQueries from "../../lib/apiQueries";
 import localforage from "localforage";
+import PhoenixSocket from "../../lib/PhoenixSocket";
 import {
   EMPTY_SESSION,
   GET_SESSION_FROM_LOCAL_STORAGE,
@@ -21,6 +22,9 @@ function* getSessionFromLocalStorage() {
     if (session) {
       // Put session to redux state
       yield put({ type: SET_SESSION, payload: session });
+      // Open socket
+      const socket = new PhoenixSocket();
+      socket.connect().joinChannel();
     }
   } catch (e) {
     console.log("Could not load session from local storage: ", e);
@@ -39,6 +43,9 @@ function* signIn(action: SignInAction) {
     yield call([localforage, "setItem"], "vinkSession", data.signin);
     // Store session in Redux state
     yield put({ type: SET_SESSION, payload: data.signin });
+    // Open socket
+    const socket = new PhoenixSocket();
+    socket.connect().joinChannel();
   } catch (error) {
     yield put({
       type: SET_AUTH_ERROR,

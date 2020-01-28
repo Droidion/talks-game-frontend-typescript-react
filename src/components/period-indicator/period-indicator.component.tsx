@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import GamePhase from "../../types/GamePhase";
 import PeriodIndicatorItem from "./period-indicator-item/period-indicator-item.component";
@@ -12,12 +12,6 @@ type Props = {
   /** Game phase: "Play" or "Analyse" */
   phaseType: GamePhase;
 };
-
-/**
- * Period Indicator block on main layout
- *
- * @visibleName PeriodIndicator
- */
 
 const PeriodIndicator: React.FC<Props> = ({ periods, currentPeriod, phaseType }) => {
   const periodIndicatorItems = [];
@@ -41,4 +35,9 @@ const PeriodIndicator: React.FC<Props> = ({ periods, currentPeriod, phaseType })
   return <div className={styles.wrapper}>{periodIndicatorItems}</div>;
 };
 
-export default PeriodIndicator;
+/**
+ * Period Indicator block on main layout
+ *
+ * @visibleName PeriodIndicator
+ */
+export default memo(PeriodIndicator);

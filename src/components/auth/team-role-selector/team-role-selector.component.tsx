@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import getRoleNameByCode from "../../../lib/getRoleNameByCode";
@@ -17,11 +17,6 @@ type Props = {
   role: TeamRole;
 };
 
-/**
- * Selector for a team role
- *
- * @visibleName TeamRoleSelector
- */
 const TeamRoleSelector: React.FC<Props> = ({ handleClick, isSelected, role }) => {
   // Role icon
   const image = role === TeamRole.Supplier ? <Oilrig /> : <Refinery />;
@@ -37,4 +32,9 @@ const TeamRoleSelector: React.FC<Props> = ({ handleClick, isSelected, role }) =>
   );
 };
 
-export default TeamRoleSelector;
+/**
+ * Selector for a team role
+ *
+ * @visibleName TeamRoleSelector
+ */
+export default memo(TeamRoleSelector);

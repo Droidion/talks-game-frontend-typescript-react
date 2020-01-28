@@ -1,15 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 
 import GamePhase from "../../types/GamePhase";
 import PeriodIndicator from "../period-indicator/period-indicator.component";
 import SessionInformer from "../session-informer/session-informer.component";
 import styles from "./header.module.scss";
 
-/**
- * Header block on main layout
- *
- * @visibleName Header
- */
 const Header: React.FC = () => {
   const dummyData = {
     currentPeriod: 1,
@@ -29,4 +24,9 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+/**
+ * Header block on main layout
+ *
+ * @visibleName Header
+ */
+export default memo(Header);
