@@ -1,14 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ReactComponent as Logo } from "../../images/logo.svg";
 import styles from "./logo-panel.module.scss";
 
-/**
- * Panel with TIM Group logo on main layout
- *
- * @visibleName LogoPanel
- */
 const LogoPanel: React.FC = () => {
   const { t } = useTranslation();
   return (
@@ -26,4 +21,9 @@ const LogoPanel: React.FC = () => {
   );
 };
 
-export default LogoPanel;
+/**
+ * Panel with TIM Group logo on main layout
+ *
+ * @visibleName LogoPanel
+ */
+export default memo(LogoPanel);

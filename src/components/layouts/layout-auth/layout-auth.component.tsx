@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 import PageSignin from "../../../pages/signin/page-signin.component";
@@ -6,11 +6,6 @@ import Badge from "../../badge/badge.component";
 import ChangeLanguage from "../../change-language/change-language.component";
 import styles from "./layout-auth.module.scss";
 
-/**
- * Layout for authentication
- *
- * @visibleName LayoutAuth
- */
 const LayoutAuth: React.FC = () => {
   const match = useRouteMatch();
   return (
@@ -30,4 +25,9 @@ const LayoutAuth: React.FC = () => {
   );
 };
 
-export default LayoutAuth;
+/**
+ * Layout for authentication
+ *
+ * @visibleName LayoutAuth
+ */
+export default memo(LayoutAuth);

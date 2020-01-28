@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import getRoleNameByCode from "../../../lib/getRoleNameByCode";
@@ -12,11 +12,6 @@ type Props = {
   role: TeamRole | undefined;
 };
 
-/**
- * Information about currently selected team number and role
- *
- * @visibleName SelectedTeam
- */
 const SelectedTeam: React.FC<Props> = ({ role, number }) => {
   const { t } = useTranslation();
   const divNumber = number && (
@@ -36,4 +31,9 @@ const SelectedTeam: React.FC<Props> = ({ role, number }) => {
   );
 };
 
-export default SelectedTeam;
+/**
+ * Information about currently selected team number and role
+ *
+ * @visibleName SelectedTeam
+ */
+export default memo(SelectedTeam);

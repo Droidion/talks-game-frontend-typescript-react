@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 
@@ -32,11 +32,6 @@ const menuItems = [
   },
 ];
 
-/**
- * Main menu for left panel
- *
- * @visibleName MainMenu
- */
 const MainMenu: React.FC = () => {
   const { t } = useTranslation();
   let location = useLocation();
@@ -57,4 +52,9 @@ const MainMenu: React.FC = () => {
   );
 };
 
-export default MainMenu;
+/**
+ * Main menu for left panel
+ *
+ * @visibleName MainMenu
+ */
+export default memo(MainMenu);

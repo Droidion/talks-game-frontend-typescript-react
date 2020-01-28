@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./error-panel.module.scss";
@@ -8,11 +8,6 @@ type Props = {
   text: string;
 };
 
-/**
- * Small panel indicating some error on authentication layout pages
- *
- * @visibleName ErrorPanel
- */
 const ErrorPanel: React.FC<Props> = ({ text }) => {
   const { t } = useTranslation();
   return (
@@ -22,4 +17,9 @@ const ErrorPanel: React.FC<Props> = ({ text }) => {
   );
 };
 
-export default ErrorPanel;
+/**
+ * Small panel indicating some error on authentication layout pages
+ *
+ * @visibleName ErrorPanel
+ */
+export default memo(ErrorPanel);

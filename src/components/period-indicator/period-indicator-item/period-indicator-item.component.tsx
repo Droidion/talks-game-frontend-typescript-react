@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React from "react";
+import React, { memo } from "react";
 
 import styles from "./period-indicator-item.module.scss";
 
@@ -11,12 +11,6 @@ type Props = {
   /** Number of the period for this indicator instance */
   periodNumber: number;
 };
-
-/**
- * Period Indicator Item on main layout
- *
- * @visibleName PeriodIndicatorItem
- */
 
 const PeriodIndicatorItem: React.FC<Props> = ({
   isAnalysePhaseFilled,
@@ -50,4 +44,9 @@ const PeriodIndicatorItem: React.FC<Props> = ({
   );
 };
 
-export default PeriodIndicatorItem;
+/**
+ * Period Indicator Item on main layout
+ *
+ * @visibleName PeriodIndicatorItem
+ */
+export default memo(PeriodIndicatorItem);
