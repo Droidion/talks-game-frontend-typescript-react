@@ -1,10 +1,4 @@
-import React from "react";
-
-/**
- * Upgrades Page
- *
- * @visibleName PageUpgrades
- */
+import React, { memo } from "react";
 
 const PageUpgrades: React.FC = () => {
   return (
@@ -14,4 +8,9 @@ const PageUpgrades: React.FC = () => {
   );
 };
 
-export default PageUpgrades;
+/**
+ * Upgrades Page
+ *
+ * @visibleName PageUpgrades
+ */
+export default memo(PageUpgrades);

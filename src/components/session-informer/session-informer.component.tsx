@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { connect, ConnectedProps } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -41,4 +41,4 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
  *
  * @visibleName SessionInformer
  */
-export default connector(SessionInformer);
+export default memo(connector(SessionInformer));

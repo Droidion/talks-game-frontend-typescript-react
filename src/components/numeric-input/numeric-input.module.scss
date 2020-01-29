@@ -1,11 +1,53 @@
 @use "../../styles/colors";
-@use "../../styles/input";
-
+/*@use "../../styles/input";*/
+@import "../../styles/input";
 .wrapper {
-  color: colors.$main-font-color-on-bright;
+  /* color: colors.$main-font-color-on-bright; */
   text-align: right;
+  display: flex;
 }
 
 input {
-  @extend .input;
+  margin-right: 1px;
+}
+
+.extreme {
+  font-size: 5.5px;
+  line-height: 6px;
+}
+
+.incrementer {
+  font-size: 8px;
+  line-height: 9px;
+  margin-right: -1px;
+}
+
+.helpers > button {
+  display: block;
+  width: 16px;
+  height: 11px;
+  background: linear-gradient(180deg, #495362 0%, #383f4b 100%);
+  border: 1px solid #2a313b;
+  box-sizing: border-box;
+  box-shadow: inset 0px 1px 2px rgba(255, 255, 255, 0.38);
+  border-radius: 0px;
+  text-align: center;
+  color: #ffffff;
+  padding: 0;
+
+  &:hover {
+    color: #71d442;
+  }
+  &:not(:first-child) {
+    margin-top: -1px;
+  }
+}
+
+.outside {
+  button:first-child {
+    border-radius: 0px 4px 0px 0px;
+  }
+  button:nth-child(2) {
+    border-radius: 0px 0px 4px 0px;
+  }
 }

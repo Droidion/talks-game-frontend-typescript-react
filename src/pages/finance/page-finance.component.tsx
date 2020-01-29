@@ -1,10 +1,4 @@
-import React from "react";
-
-/**
- * Finance Page
- *
- * @visibleName PageFinance
- */
+import React, { memo } from "react";
 
 const PageFinance: React.FC = () => {
   return (
@@ -14,4 +8,9 @@ const PageFinance: React.FC = () => {
   );
 };
 
-export default PageFinance;
+/**
+ * Finance Page
+ *
+ * @visibleName PageFinance
+ */
+export default memo(PageFinance);

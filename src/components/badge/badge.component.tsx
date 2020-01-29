@@ -1,14 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ReactComponent as LogoSvg } from "../../images/logo.svg";
 import styles from "./badge.module.scss";
 
-/**
- * Ribbon-like badge with TIM Group logo.
- *
- * @visibleName Badge
- */
 const Badge: React.FC = () => {
   const { t } = useTranslation();
   return (
@@ -21,4 +16,9 @@ const Badge: React.FC = () => {
   );
 };
 
-export default Badge;
+/**
+ * Ribbon-like badge with TIM Group logo.
+ *
+ * @visibleName Badge
+ */
+export default memo(Badge);

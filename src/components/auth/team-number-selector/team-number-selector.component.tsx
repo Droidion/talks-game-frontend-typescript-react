@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import classnames from "classnames";
 
@@ -13,11 +13,6 @@ type Props = {
   number: number;
 };
 
-/**
- * Selector for a team number
- *
- * @visibleName TeamNumberSelector
- */
 const TeamNumberSelector: React.FC<Props> = ({
   handleClick,
   isSelected,
@@ -33,4 +28,9 @@ const TeamNumberSelector: React.FC<Props> = ({
   );
 };
 
-export default TeamNumberSelector;
+/**
+ * Selector for a team number
+ *
+ * @visibleName TeamNumberSelector
+ */
+export default memo(TeamNumberSelector);

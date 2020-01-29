@@ -1,10 +1,4 @@
-import React from "react";
-
-/**
- * Problems Page
- *
- * @visibleName PageProblems
- */
+import React, { memo } from "react";
 
 const PageProblems: React.FC = () => {
   return (
@@ -14,4 +8,9 @@ const PageProblems: React.FC = () => {
   );
 };
 
-export default PageProblems;
+/**
+ * Problems Page
+ *
+ * @visibleName PageProblems
+ */
+export default memo(PageProblems);

@@ -1,10 +1,4 @@
-import React from "react";
-
-/**
- * Results Page
- *
- * @visibleName PageResults
- */
+import React, { memo } from "react";
 
 const PageResults: React.FC = () => {
   return (
@@ -14,4 +8,9 @@ const PageResults: React.FC = () => {
   );
 };
 
-export default PageResults;
+/**
+ * Results Page
+ *
+ * @visibleName PageResults
+ */
+export default memo(PageResults);

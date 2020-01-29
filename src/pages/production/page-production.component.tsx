@@ -1,10 +1,4 @@
-import React from "react";
-
-/**
- * Production Page
- *
- * @visibleName PageProduction
- */
+import React, { memo } from "react";
 
 const PageProduction: React.FC = () => {
   return (
@@ -14,4 +8,9 @@ const PageProduction: React.FC = () => {
   );
 };
 
-export default PageProduction;
+/**
+ * Production Page
+ *
+ * @visibleName PageProduction
+ */
+export default memo(PageProduction);
