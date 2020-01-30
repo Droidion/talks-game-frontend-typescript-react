@@ -1,10 +1,11 @@
+@use "../../styles/backgrounds";
 @use "../../styles/colors";
-/*@use "../../styles/input";*/
+@use "../../styles/shadows";
 @import "../../styles/input";
+
 .wrapper {
-  /* color: colors.$main-font-color-on-bright; */
-  text-align: right;
   display: flex;
+  text-align: right;
 }
 
 input {
@@ -12,31 +13,31 @@ input {
 }
 
 .extreme {
-  font-size: 5.5px;
-  line-height: 6px;
+  font-size: 0.42rem;
+  line-height: 0.46rem;
 }
 
 .incrementer {
-  font-size: 8px;
-  line-height: 9px;
+  font-size: 0.6rem;
+  line-height: 0.7rem;
   margin-right: -1px;
 }
 
 .helpers > button {
-  display: block;
-  width: 16px;
-  height: 11px;
-  background: linear-gradient(180deg, #495362 0%, #383f4b 100%);
-  border: 1px solid #2a313b;
-  box-sizing: border-box;
-  box-shadow: inset 0px 1px 2px rgba(255, 255, 255, 0.38);
+  background: backgrounds.$dark-gray-gradient;
   border-radius: 0px;
-  text-align: center;
-  color: #ffffff;
+  border: 1px solid colors.$ebony-clay;
+  box-shadow: shadows.$box-shadow-helpers;
+  box-sizing: border-box;
+  color: colors.$white;
+  display: block;
+  height: 0.85rem;
   padding: 0;
+  text-align: center;
+  width: 1.23rem;
 
   &:hover {
-    color: #71d442;
+    color: colors.$atlantis;
   }
   &:not(:first-child) {
     margin-top: -1px;
@@ -45,9 +46,9 @@ input {
 
 .outside {
   button:first-child {
-    border-radius: 0px 4px 0px 0px;
+    border-radius: 0 0.3rem 0 0;
   }
   button:nth-child(2) {
-    border-radius: 0px 0px 4px 0px;
+    border-radius: 0 0 0.3rem 0;
   }
 }

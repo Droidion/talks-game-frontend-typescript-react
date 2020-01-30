@@ -35,3 +35,9 @@ $red-gradient: linear-gradient(
   colors.$fuzzy-wuzzy-brown 0%,
   colors.$apple-blossom 100%
 );
+
+$dark-gray-gradient: linear-gradient(
+  180deg,
+  colors.$river-bed 0%,
+  colors.$bright-gray 100%
+);
