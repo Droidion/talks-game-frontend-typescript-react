@@ -44,7 +44,7 @@ class NumericInput extends React.Component<INumericInputProps, INumericInputStat
     this.inputRef = React.createRef();
 
     this.state = {
-      value: this.props.initialValue.toFixed(2),
+      value: formatNumbersAsCurrency(this.props.initialValue.toFixed(2)),
       position: null,
     };
   }
@@ -203,7 +203,7 @@ class NumericInput extends React.Component<INumericInputProps, INumericInputStat
           name={"max"}
           onClick={this.setExtreme}
         >
-          max
+          MAX
         </button>
         <button
           className={styles.extreme}
@@ -211,7 +211,7 @@ class NumericInput extends React.Component<INumericInputProps, INumericInputStat
           name={"min"}
           onClick={this.setExtreme}
         >
-          min
+          MIN
         </button>
       </div>
     );

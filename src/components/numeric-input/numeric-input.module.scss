@@ -9,38 +9,38 @@
 }
 
 input {
-  margin-right: 1px;
+  margin-right: 0.07rem;
 }
 
 .extreme {
-  font-size: 0.42rem;
-  line-height: 0.46rem;
+  font-size: 0.6rem;
+  line-height: 1.07rem;
 }
 
 .incrementer {
   font-size: 0.6rem;
-  line-height: 0.7rem;
-  margin-right: -1px;
+  line-height: 1.07rem;
+  margin-right: -0.07rem;
 }
 
 .helpers > button {
   background: backgrounds.$dark-gray-gradient;
   border-radius: 0px;
-  border: 1px solid colors.$ebony-clay;
+  border: 0.07rem solid colors.$ebony-clay;
   box-shadow: shadows.$box-shadow-helpers;
   box-sizing: border-box;
   color: colors.$white;
   display: block;
-  height: 0.85rem;
+  height: 1.185rem;
   padding: 0;
   text-align: center;
-  width: 1.23rem;
+  width: 1.7rem;
 
   &:hover {
     color: colors.$atlantis;
   }
   &:not(:first-child) {
-    margin-top: -1px;
+    margin-top: -0.07rem;
   }
 }
 
