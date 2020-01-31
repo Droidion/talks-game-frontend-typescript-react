@@ -1,0 +1,54 @@
+@use "../../styles/backgrounds";
+@use "../../styles/colors";
+@use "../../styles/shadows";
+@import "../../styles/input";
+
+.wrapper {
+  display: flex;
+  text-align: right;
+}
+
+input {
+  margin-right: 0.07rem;
+}
+
+.extreme {
+  font-size: 0.6rem;
+  line-height: 1.07rem;
+}
+
+.incrementer {
+  font-size: 0.6rem;
+  line-height: 1.07rem;
+  margin-right: -0.07rem;
+}
+
+.helpers > button {
+  background: backgrounds.$dark-gray-gradient;
+  border-radius: 0px;
+  border: 0.07rem solid colors.$ebony-clay;
+  box-shadow: shadows.$box-shadow-helpers;
+  box-sizing: border-box;
+  color: colors.$white;
+  display: block;
+  height: 1.185rem;
+  padding: 0;
+  text-align: center;
+  width: 1.7rem;
+
+  &:hover {
+    color: colors.$atlantis;
+  }
+  &:not(:first-child) {
+    margin-top: -0.07rem;
+  }
+}
+
+.outside {
+  button:first-child {
+    border-radius: 0 0.3rem 0 0;
+  }
+  button:nth-child(2) {
+    border-radius: 0 0 0.3rem 0;
+  }
+}

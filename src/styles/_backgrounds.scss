@@ -12,7 +12,7 @@ $gray-gradient: linear-gradient(
 );
 $gray-gradient-period: linear-gradient(
   180deg,
-  colors.$pale-sky 0%,
+  colors.$gray-gradient-period-start 0%,
   colors.$trout 100%
 );
 $green-gradient-period: linear-gradient(
@@ -34,4 +34,10 @@ $red-gradient: linear-gradient(
   180deg,
   colors.$fuzzy-wuzzy-brown 0%,
   colors.$apple-blossom 100%
+);
+
+$dark-gray-gradient: linear-gradient(
+  180deg,
+  colors.$river-bed 0%,
+  colors.$bright-gray 100%
 );
