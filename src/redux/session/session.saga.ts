@@ -1,19 +1,14 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import fetchGraphQL from "../../lib/fetchGraphQL";
-import apiQueries from "../../lib/apiQueries";
 import localforage from "localforage";
+import { call, put, takeLatest } from "redux-saga/effects";
+
+import apiQueries from "../../lib/apiQueries";
+import fetchGraphQL from "../../lib/fetchGraphQL";
 import PhoenixSocket from "../../lib/PhoenixSocket";
-import {
-  EMPTY_SESSION,
-  GET_SESSION_FROM_LOCAL_STORAGE,
-  SET_AUTH_ERROR,
-  SET_SESSION,
-  SIGN_IN,
-  SIGN_OUT,
-  SignInAction,
-  SignOutAction,
-} from "../../types/SessionActionTypes";
 import ISession from "../../types/ISession";
+import {
+    EMPTY_SESSION, GET_SESSION_FROM_LOCAL_STORAGE, SET_AUTH_ERROR, SET_SESSION, SIGN_IN, SIGN_OUT,
+    SignInAction, SignOutAction
+} from "../../types/SessionActionTypes";
 
 /** Get session from local browser storage */
 function* getSessionFromLocalStorage() {
@@ -61,12 +56,13 @@ function* signOut(action: SignOutAction) {
     yield call(fetchGraphQL, apiQueries.SIGN_OUT, {
       token: action.payload.token,
     });
+  } catch (error) {
+    console.error(error);
+  } finally {
     // Clear session in local storage
     yield call([localforage, "removeItem"], "vinkSession");
     // Clear session in Redux state
     yield put({ type: EMPTY_SESSION });
-  } catch (error) {
-    console.error(error);
   }
 }
 
