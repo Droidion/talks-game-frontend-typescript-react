@@ -1,0 +1,27 @@
+@use "../../styles/colors";
+@use "../../styles/shadows";
+
+.checkbox {
+  -webkit-appearance: none;
+  background-color: colors.$shark;
+  border-radius: 0.308rem;
+  box-shadow: shadows.$box-shadow-checkbox;
+  display: inline-block;
+  height: 1.538rem;
+  position: relative;
+  width: 1.538rem;
+  &:focus {
+    outline: none;
+  }
+}
+.checkbox:checked:after {
+  color: colors.$white;
+  content: "\2713";
+  font-size: 1.231rem;
+  left: 0.308rem;
+  line-height: 1.385rem;
+  position: absolute;
+  text-shadow: shadows.$text-shadow-checkbox;
+  top: 0.077rem;
+  transform: rotate(10deg);
+}
