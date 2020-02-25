@@ -12,12 +12,6 @@ interface IInputPasswordProps extends WithTranslation {
   handlePassword: (password: string) => void;
 }
 
-interface IInputPasswordState {
-  errorEmptied: boolean;
-  isLoading: boolean;
-  password: string;
-}
-
 type AllProps = ConnectedProps<typeof connector> &
   WithTranslation &
   IInputPasswordProps;
