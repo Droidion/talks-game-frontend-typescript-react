@@ -1,0 +1,39 @@
+.container {
+  max-width: 19.384rem;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #252a32;
+  border-radius: 4px;
+  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1),
+    inset 0px 4px 8px rgba(0, 0, 0, 0.25);
+  height: 0.615rem;
+  outline: none;
+  width: 100%;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: url("../../images/knob.png");
+  border: 0;
+  border-radius: 50%;
+  height: 21px;
+  width: 21px;
+  &:hover {
+    box-shadow: 0px 0px 8px #71d442;
+  }
+}
+
+.slider::-moz-range-thumb {
+  background: url("../../images/knob.png");
+  border: 0;
+  border-radius: 50%;
+  height: 21px;
+  width: 21px;
+  &:hover {
+    box-shadow: 0px 0px 8px #71d442;
+  }
+}
