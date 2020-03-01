@@ -1,3 +1,39 @@
+$track-w: 12.5em;
+$track-h: 0.615em;
+$thumb-d: 1.5em;
+$track-c: #252a32;
+$filll-c: red;
+
+@mixin track($fill: 0) {
+  box-sizing: border-box;
+  background: $track-c;
+  border-radius: 4px;
+  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1),
+    inset 0px 4px 8px rgba(0, 0, 0, 0.25);
+  height: $track-h;
+  outline: none;
+  width: $track-w;
+
+  @if $fill == 1 {
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.54);
+    background: content-box
+      linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%)
+      0 /
+      var(--sx)
+      100%
+      no-repeat
+      #252a32;
+  }
+}
+
+@mixin fill() {
+  height: $track-h;
+  background: $filll-c;
+}
+
 .container {
   max-width: 19.384rem;
 }
@@ -5,18 +41,67 @@
 .slider {
   -webkit-appearance: none;
   appearance: none;
-  background: #252a32;
+
+  outline: none;
+  /*background: $track-c;
   border-radius: 4px;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1),
     inset 0px 4px 8px rgba(0, 0, 0, 0.25);
-  height: 0.615rem;
+  height: $track-h;
   outline: none;
-  width: 100%;
+  width: 100%;*/
+  --range: calc(var(--max) - var(--min));
+  --ratio: calc((var(--val) - var(--min)) / var(--range));
+  --sx: calc(0.5 * #{$thumb-d} + var(--ratio) * (100% - #{$thumb-d}));
+  margin: 0;
+  padding: 0;
+  width: $track-w;
+  background: transparent;
+  &::-webkit-slider-runnable-track {
+    @include track(1);
+  }
 }
+
+/*[type='range'] {
+    &, &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+    
+    --range: calc(var(--max) - var(--min));
+    --ratio: calc((var(--val) - var(--min))/var(--range));
+    --sx: calc(.5*#{$thumb-d} + var(--ratio)*(100% - #{$thumb-d}));
+    margin: 0;
+    padding: 0;
+    width: $track-w; height: $thumb-d;
+    background: transparent;
+    font: 1em/1 arial, sans-serif;
+    
+    &::-webkit-slider-runnable-track {
+        @include track(1)
+    }
+    &::-moz-range-track { @include track }
+    &::-ms-track { @include track }
+    
+    &::-moz-range-progress { @include fill }
+    &::-ms-fill-lower { @include fill }
+    
+    &::-webkit-slider-thumb {
+        margin-top: .5*($track-h - $thumb-d);
+        @include thumb
+    }
+    &::-moz-range-thumb { @include thumb }
+    &::-ms-thumb {
+        margin-top: 0;
+        @include thumb
+    }
+    
+    &::-ms-tooltip { display: none }
+}*/
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
+  margin-top: 0.5 * ($track-h - $thumb-d);
   background: url("../../images/knob.png");
   border: 0;
   border-radius: 50%;
