@@ -40,7 +40,7 @@ const Slider: React.FC<Props> = ({
   };
   return (
     <div className={styles.container}>
-      <div className={styles.track}>
+      <div className={styles.track} style={style}>
         <input
           className={styles.slider}
           type="range"
@@ -50,6 +50,7 @@ const Slider: React.FC<Props> = ({
           value={sliderValue}
           style={style}
         />
+        <span className={styles.labelRange}>{sliderValue}</span>
       </div>
     </div>
   );

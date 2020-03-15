@@ -3,6 +3,7 @@ $track-h: 0.615em;
 $thumb-d: 1.5em;
 $track-c: #252a32;
 $filll-c: red;
+$dist: $track-w - $thumb-d;
 
 @mixin track($fill: 0) {
   box-sizing: border-box;
@@ -62,6 +63,35 @@ $filll-c: red;
   }
 }
 
+.labelRange {
+  //display: inline-block;
+  text-align: center;
+  background: linear-gradient(180deg, #cecfd3 0%, #faffff 100%);
+  box-shadow: 0px 0px 5px rgba(36, 41, 48, 0.5);
+  border-radius: 4px;
+  color: #2c2c2c;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 0 3px;
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + #{$thumb-d} / 2);
+  left: 10px;
+  transform: translate(
+    calc((var(--val) - var(--min)) / (var(--max) - var(--min)) * #{$dist} - 50%)
+  );
+}
+
+.labelRange::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 30%;
+  border-width: 3px;
+  border-style: solid;
+  border-color: transparent transparent #cecfd3 transparent;
+}
+
 /*[type='range'] {
     &, &::-webkit-slider-thumb {
         -webkit-appearance: none;
@@ -97,7 +127,9 @@ $filll-c: red;
     
     &::-ms-tooltip { display: none }
 }*/
-
+.track {
+  position: relative;
+}
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
