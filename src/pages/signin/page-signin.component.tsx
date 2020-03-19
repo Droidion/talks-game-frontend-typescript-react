@@ -1,5 +1,5 @@
-import React from "react";
-import { withTranslation, WithTranslation } from "react-i18next";
+import React, { useState } from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
 import posed from "react-pose";
 import { connect, ConnectedProps } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -16,17 +16,6 @@ import ISessionState from "../../types/ISessionState";
 import TeamRole from "../../types/TeamRole";
 import styles from "./page-signin.module.scss";
 
-interface State {
-  /** Visibility status of sign in step content */
-  isVisible: boolean;
-  /** Selected team number */
-  selectedNumber: number | undefined;
-  /** Selected team role */
-  selectedRole: TeamRole | undefined;
-  /** Sign in step for showing different sign in control elements */
-  step: number;
-}
-
 type Props = ConnectedProps<typeof connector> & WithTranslation;
 
 const Box = posed.div({
@@ -34,89 +23,85 @@ const Box = posed.div({
   visible: { opacity: 1, transition: { duration: 300 } },
 });
 
-class PageSignin extends React.Component<Props, State> {
-  constructor(props: ConnectedProps<typeof connector> & WithTranslation) {
-    super(props);
-    this.state = {
-      isVisible: true,
-      selectedNumber: undefined,
-      selectedRole: undefined,
-      step: 1,
-    };
-  }
+const PageSignin: React.FC<Props> = (props) => {
+  // Visibility status of sign in step content
+  const [isVisible, setIsVisible] = useState(true);
+  // Selected team number
+  const [selectedNumber, setSelectedNumber] = useState();
+  // Selected team role
+  const [selectedRole, setSelectedRole] = useState();
+  // Sign in step for showing different sign in control elements
+  const [step, setStep] = useState(1);
 
   /** Fire sign in action when user submits password */
-  handlePassword = (password: string) => {
-    const login = this.composeLogin();
+  const handlePassword = (password: string) => {
+    const login = composeLogin();
     if (login) {
-      this.props.signIn(login, password);
+      props.signIn(login, password);
     }
   };
 
   /** Change step and apply animation */
-  moveStep = (timeoutCallback: Function) => {
-    this.setState({ isVisible: false });
+  const moveStep = (timeoutCallback: Function) => {
+    setIsVisible(false);
     setTimeout(timeoutCallback, 300);
   };
 
   /** Go one step further */
-  goNextStep = () => {
-    this.moveStep(() => {
-      this.setState({ step: this.state.step + 1, isVisible: true });
+  const goNextStep = () => {
+    moveStep(() => {
+      setStep(step + 1);
+      setIsVisible(true);
     });
   };
 
   /** Go one step earlier */
-  goPrevStep = () => {
-    this.moveStep(() => {
-      this.props.emptyAuthError();
-      this.setState({ step: this.state.step - 1, isVisible: true });
+  const goPrevStep = () => {
+    moveStep(() => {
+      props.emptyAuthError();
+      setStep(step - 1);
+      setIsVisible(true);
     });
   };
 
   /** Set team role to state and move to next step */
-  setRole = (role: TeamRole) => {
-    this.setState({ selectedRole: role });
-    this.goNextStep();
+  const setRole = (role: TeamRole) => {
+    setSelectedRole(role);
+    goNextStep();
   };
 
   /** Set team number to state and move to next step */
-  setNumber = (num: number) => {
-    this.setState({ selectedNumber: num });
-    this.goNextStep();
+  const setNumber = (num: number) => {
+    setSelectedNumber(num);
+    goNextStep();
   };
 
   /** Construct login from team role and team number */
-  composeLogin = (): string | undefined => {
-    if (!this.state.selectedRole || !this.state.selectedNumber) return undefined;
-    return this.state.selectedRole + this.state.selectedNumber;
+  const composeLogin = (): string | undefined => {
+    if (!selectedRole || !selectedNumber) return undefined;
+    return selectedRole + selectedNumber;
   };
 
   /** Back button to return one step back */
-  backButton = () => {
+  const backButton = () => {
     return (
       <div className={styles.buttonBack}>
         <ButtonAuth
-          handleClick={() => this.goPrevStep()}
+          handleClick={() => goPrevStep()}
           isLoading={false}
-          text={this.props.t("Back")}
+          text={props.t("Back")}
         />
       </div>
     );
   };
 
   /** Step with team role selection */
-  roleSelectors = () => {
-    const { isVisible } = this.state;
+  const roleSelectors = () => {
     return (
       <Box className={styles.selectorList} pose={isVisible ? "visible" : "hidden"}>
         {[TeamRole.Supplier, TeamRole.Consumer].map((el) => (
           <div key={el} data-testid={el} className={styles.selectorEl}>
-            <TeamRoleSelector
-              handleClick={this.setRole}
-              isSelected={false}
-              role={el}
-            />
+            <TeamRoleSelector handleClick={setRole} isSelected={false} role={el} />
           </div>
         ))}
       </Box>
@@ -124,14 +109,10 @@ class PageSignin extends React.Component<Props, State> {
   };
 
   /** Step with team number selection */
-  numberSelectors = () => {
-    const { isVisible } = this.state;
+  const numberSelectors = () => {
     return (
       <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
-        <SelectedTeam
-          role={this.state.selectedRole}
-          number={this.state.selectedNumber}
-        />
+        <SelectedTeam role={selectedRole} number={selectedNumber} />
         <div className={styles.selectorList}>
           {[1, 2, 3, 4, 5].map((num) => (
             <div
@@ -140,65 +121,59 @@ class PageSignin extends React.Component<Props, State> {
               key={num}
             >
               <TeamNumberSelector
-                handleClick={this.setNumber}
+                handleClick={setNumber}
                 isSelected={false}
                 number={num}
               />
             </div>
           ))}
         </div>
-        {this.backButton()}
+        {backButton()}
       </Box>
     );
   };
 
   /** Last step with password input */
-  passwordInput = () => {
-    const { authError } = this.props;
-    const { isVisible } = this.state;
+  const passwordInput = () => {
+    const { authError } = props;
     return (
       <Box className={styles.selectorGroup} pose={isVisible ? "visible" : "hidden"}>
-        <SelectedTeam
-          role={this.state.selectedRole}
-          number={this.state.selectedNumber}
-        />
-        <InputPassword handlePassword={this.handlePassword} />
+        <SelectedTeam role={selectedRole} number={selectedNumber} />
+        <InputPassword handlePassword={handlePassword} />
         {authError && (
           <div className={styles.errorPanel}>
             <ErrorPanel text={authError} />
           </div>
         )}
-        {this.backButton()}
+        {backButton()}
       </Box>
     );
   };
 
   /** Decide what to show on each sign in step */
-  stepContent = () => {
-    switch (this.state.step) {
+  const stepContent = () => {
+    switch (step) {
       case 1:
-        return this.roleSelectors();
+        return roleSelectors();
       case 2:
-        return this.numberSelectors();
+        return numberSelectors();
       default:
-        return this.passwordInput();
+        return passwordInput();
     }
   };
 
-  render() {
-    const { session, t } = this.props;
-    return session ? (
-      <Redirect to="/production" />
-    ) : (
-      <div className={styles.wrapper}>
-        <h1>{t("Talks Planet")}</h1>
-        <h2>{t("Business Simulation by TIM Group")}</h2>
-        <div className={styles.separator}></div>
-        <div className={styles.steps}>{this.stepContent()}</div>
-      </div>
-    );
-  }
-}
+  const { session, t } = props;
+  return session ? (
+    <Redirect to="/production" />
+  ) : (
+    <div className={styles.wrapper}>
+      <h1>{t("Talks Planet")}</h1>
+      <h2>{t("Business Simulation by TIM Group")}</h2>
+      <div className={styles.separator}></div>
+      <div className={styles.steps}>{stepContent()}</div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state: RootState): ISessionState => ({
   authError: state.session.authError,
