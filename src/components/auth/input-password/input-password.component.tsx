@@ -1,82 +1,70 @@
-import React from "react";
-import { withTranslation, WithTranslation } from "react-i18next";
+import React, { useEffect, useState } from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect, ConnectedProps } from "react-redux";
 
+import { RootState } from "../../../redux/root-reducer";
 import { emptyAuthError } from "../../../redux/session/session.actions";
 import ButtonAuth from "../button-auth/button-auth.component";
 import styles from "./input-password.module.scss";
-import { RootState } from "../../../redux/root-reducer";
 
 interface IInputPasswordProps extends WithTranslation {
   /** Event handler when user clicks the button */
   handlePassword: (password: string) => void;
 }
 
-interface IInputPasswordState {
-  errorEmptied: boolean;
-  isLoading: boolean;
-  password: string;
-}
-
 type AllProps = ConnectedProps<typeof connector> &
   WithTranslation &
   IInputPasswordProps;
 
-class InputPassword extends React.Component<AllProps, IInputPasswordState> {
-  constructor(props: AllProps) {
-    super(props);
-    this.state = {
-      errorEmptied: false,
-      isLoading: false,
-      password: "",
-    };
-  }
-  componentDidUpdate(prevProps: AllProps) {
-    if (prevProps.authError !== this.props.authError && this.props.authError) {
-      this.setState({ isLoading: false });
+const InputPassword: React.FC<AllProps> = (props) => {
+  const [errorEmptied, setErrorEmptied] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (props.authError) {
+      setIsLoading(false);
     }
-  }
-  handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ password: event.target.value });
-    this.setState({ isLoading: false });
-    if (!this.state.errorEmptied) {
-      this.props.emptyAuthError();
-      this.setState({ errorEmptied: true });
+  }, [props.authError]);
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+    setIsLoading(false);
+    if (!errorEmptied) {
+      props.emptyAuthError();
+      setErrorEmptied(true);
     }
   };
-  submitPassword = () => {
-    this.setState({ errorEmptied: false });
-    this.setState({ isLoading: true });
-    this.props.handlePassword(this.state.password);
+  const submitPassword = () => {
+    setErrorEmptied(false);
+    setIsLoading(true);
+    props.handlePassword(password);
   };
-  handleKeyPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      this.submitPassword();
+      submitPassword();
     }
   };
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <input
-          data-testid="inputPassword"
-          onChange={this.handleChangePassword}
-          onKeyPress={this.handleKeyPressed}
-          className={styles.input}
-          autoFocus
-          type="password"
-          placeholder={this.props.t("Password")}
+  return (
+    <div className={styles.wrapper}>
+      <input
+        data-testid="inputPassword"
+        onChange={handleChangePassword}
+        onKeyPress={handleKeyPressed}
+        className={styles.input}
+        autoFocus
+        type="password"
+        placeholder={props.t("Password")}
+      />
+      <div data-testid="buttonAuth" className={styles.btnContainer}>
+        <ButtonAuth
+          handleClick={submitPassword}
+          isLoading={isLoading}
+          text={props.t("Sign in")}
         />
-        <div data-testid="buttonAuth" className={styles.btnContainer}>
-          <ButtonAuth
-            handleClick={this.submitPassword}
-            isLoading={this.state.isLoading}
-            text={this.props.t("Sign in")}
-          />
-        </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapDispatchToProps = {
   emptyAuthError: () => emptyAuthError(),
