@@ -41,7 +41,7 @@ const NumericInput: React.FC<INumericInputProps> = ({
   minPossibleValue = new Decimal(0),
 }) => {
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
-  const [position, setPosition] = useState();
+  const [position, setPosition] = useState<number>();
   const [value, setvalue] = useState(
     formatNumbersAsCurrency(initialValue.toFixed(2))
   );
@@ -69,8 +69,8 @@ const NumericInput: React.FC<INumericInputProps> = ({
   useEffect(() => {
     if (inputRef.current) {
       // Set cursor position after rendering
-      inputRef.current.selectionStart = position;
-      inputRef.current.selectionEnd = position;
+      inputRef.current.selectionStart = position || null;
+      inputRef.current.selectionEnd = position || null;
     }
   });
 
@@ -96,7 +96,7 @@ const NumericInput: React.FC<INumericInputProps> = ({
         handleChange(calculatedValue);
       } else {
         setvalue(formattedInput);
-        setPosition(position);
+        setPosition(position || undefined);
       }
     }
   };
