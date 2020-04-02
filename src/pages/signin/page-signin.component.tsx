@@ -27,9 +27,9 @@ const PageSignin: React.FC<Props> = (props) => {
   // Visibility status of sign in step content
   const [isVisible, setIsVisible] = useState(true);
   // Selected team number
-  const [selectedNumber, setSelectedNumber] = useState();
+  const [selectedNumber, setSelectedNumber] = useState<number>();
   // Selected team role
-  const [selectedRole, setSelectedRole] = useState();
+  const [selectedRole, setSelectedRole] = useState<TeamRole>();
   // Sign in step for showing different sign in control elements
   const [step, setStep] = useState(1);
 
