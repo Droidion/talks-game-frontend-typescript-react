@@ -13,12 +13,6 @@ type Props = {
   minValue: number;
 };
 
-/**
- * A slider for choosing numbers between lower and upper bounds.
- *
- * @visibleName Slider
- */
-
 const Slider: React.FC<Props> = ({
   defaultValue,
   handleChange,
@@ -31,8 +25,10 @@ const Slider: React.FC<Props> = ({
     "--val": defaultValue,
   } as React.CSSProperties;
 
-  const [sliderValue, setSliderValue] = useState(defaultValue);
-  const [styleVariables, setStyleVariables] = useState(initialStyleVariables);
+  const [sliderValue, setSliderValue] = useState<number>(defaultValue);
+  const [styleVariables, setStyleVariables] = useState<React.CSSProperties>(
+    initialStyleVariables
+  );
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(Number(event.target.value));
@@ -63,4 +59,9 @@ const Slider: React.FC<Props> = ({
   );
 };
 
+/**
+ * A slider for choosing numbers between lower and upper bounds.
+ *
+ * @visibleName Slider
+ */
 export default memo(Slider);
