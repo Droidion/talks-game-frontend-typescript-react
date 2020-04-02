@@ -25,33 +25,40 @@ const Slider: React.FC<Props> = ({
   maxValue,
   minValue,
 }) => {
-  const styleDefault = {
-    "--min": minValue,
+  const initialStyleVariables = {
     "--max": maxValue,
+    "--min": minValue,
     "--val": defaultValue,
   } as React.CSSProperties;
+
   const [sliderValue, setSliderValue] = useState(defaultValue);
-  const [style, setStyle] = useState(styleDefault);
+  const [styleVariables, setStyleVariables] = useState(initialStyleVariables);
+
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(Number(event.target.value));
-    const newStyle = { ...styleDefault, "--val": Number(event.target.value) };
-    setStyle(newStyle);
+    const newStyle = {
+      ...initialStyleVariables,
+      "--val": Number(event.target.value),
+    };
+    setStyleVariables(newStyle);
     handleChange(Number(event.target.value));
   };
+
   return (
     <div className={styles.container}>
-      <div className={styles.track} style={style}>
-        <input
-          className={styles.slider}
-          type="range"
-          min={minValue}
-          max={maxValue}
-          onChange={handleChangeInput}
-          value={sliderValue}
-          style={style}
-        />
-        <span className={styles.labelRange}>{sliderValue}</span>
-      </div>
+      <input
+        className={styles.slider}
+        data-testid="slider"
+        max={maxValue}
+        min={minValue}
+        onChange={handleChangeInput}
+        style={styleVariables}
+        type="range"
+        value={sliderValue}
+      />
+      <span className={styles.label} style={styleVariables}>
+        {sliderValue}
+      </span>
     </div>
   );
 };

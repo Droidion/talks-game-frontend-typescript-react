@@ -1,156 +1,94 @@
-$track-w: 12.5em;
-$track-h: 0.615em;
-$thumb-d: 1.5em;
-$track-c: #252a32;
-$filll-c: red;
-$dist: $track-w - $thumb-d;
+@use "../../styles/colors";
+@use "../../styles/shadows";
+@use "../../styles/backgrounds";
 
-@mixin track($fill: 0) {
-  box-sizing: border-box;
-  background: $track-c;
-  border-radius: 4px;
-  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1),
-    inset 0px 4px 8px rgba(0, 0, 0, 0.25);
-  height: $track-h;
-  outline: none;
-  width: $track-w;
-
-  @if $fill == 1 {
-    border-radius: 4px;
-    box-sizing: border-box;
-    outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.54);
-    background: content-box
-      linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%)
-      0 /
-      var(--sx)
-      100%
-      no-repeat
-      #252a32;
-  }
-}
-
-@mixin fill() {
-  height: $track-h;
-  background: $filll-c;
-}
+$track-width: 19.385rem;
+$track-height: 0.615rem;
+$thumb-diameter: 1.615rem;
+$shift: $track-width - $thumb-diameter;
+$arrow-width: 0.23rem;
 
 .container {
-  max-width: 19.384rem;
+  position: relative;
+}
+
+@mixin track() {
+  background-color: colors.$dark-slider-background;
+  background-image: url("../../images/slider-fill-rounded-edge.svg"),
+    url("../../images/slider-fill.svg");
+  background-position: 0;
+  background-repeat: no-repeat, no-repeat;
+  background-size: $track-height, var(--sx) 100%;
+  border-radius: 0.3rem;
+  box-shadow: shadows.$box-shadow-slider-track;
+  box-sizing: border-box;
+  height: $track-height;
+  outline: none;
+}
+
+@mixin thumb() {
+  background: url("../../images/slider-thumb.svg") no-repeat;
+  border: 0;
+  border-radius: 50%;
+  height: $thumb-diameter;
+  width: $thumb-diameter;
+  &:hover {
+    box-shadow: shadows.$box-shadow-lider-thumb;
+  }
 }
 
 .slider {
-  -webkit-appearance: none;
-  appearance: none;
-
-  outline: none;
-  /*background: $track-c;
-  border-radius: 4px;
-  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1),
-    inset 0px 4px 8px rgba(0, 0, 0, 0.25);
-  height: $track-h;
-  outline: none;
-  width: 100%;*/
   --range: calc(var(--max) - var(--min));
   --ratio: calc((var(--val) - var(--min)) / var(--range));
-  --sx: calc(0.5 * #{$thumb-d} + var(--ratio) * (100% - #{$thumb-d}));
-  margin: 0;
-  padding: 0;
-  width: $track-w;
+  --sx: calc(0.5 * #{$thumb-diameter} + var(--ratio) * (100% - #{$thumb-diameter}));
+  -webkit-appearance: none;
+  appearance: none;
   background: transparent;
+  height: $thumb-diameter;
+  margin: 0;
+  outline: none;
+  width: $track-width;
   &::-webkit-slider-runnable-track {
-    @include track(1);
+    @include track();
+  }
+  &::-moz-range-track {
+    @include track();
+  }
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: 0.5 * ($track-height - $thumb-diameter);
+    @include thumb();
+  }
+  &::-moz-range-thumb {
+    @include thumb();
   }
 }
 
-.labelRange {
-  //display: inline-block;
-  text-align: center;
-  background: linear-gradient(180deg, #cecfd3 0%, #faffff 100%);
-  box-shadow: 0px 0px 5px rgba(36, 41, 48, 0.5);
-  border-radius: 4px;
-  color: #2c2c2c;
-  font-size: 12px;
-  line-height: 14px;
-  padding: 0 3px;
+.label {
+  background: backgrounds.$lightgray-gradient;
+  border-radius: 0.3rem;
+  box-shadow: shadows.$box-shadow-informer-1;
+  color: colors.$mine-shaft;
+  font-size: 0.92rem;
+  left: $thumb-diameter / 2;
+  line-height: 1.076rem;
+  min-width: 2.3rem;
+  padding: 0 0.23rem;
   position: absolute;
-  z-index: 1;
-  top: calc(100% + #{$thumb-d} / 2);
-  left: 10px;
+  text-align: center;
+  top: calc(0.538rem + #{$thumb-diameter});
   transform: translate(
-    calc((var(--val) - var(--min)) / (var(--max) - var(--min)) * #{$dist} - 50%)
+    calc((var(--val) - var(--min)) / (var(--max) - var(--min)) * #{$shift} - 50%)
   );
 }
 
-.labelRange::after {
+.label::after {
   content: "";
   position: absolute;
   bottom: 100%;
-  left: 30%;
-  border-width: 3px;
+  left: calc(50% - #{$arrow-width});
+  border-width: $arrow-width;
   border-style: solid;
-  border-color: transparent transparent #cecfd3 transparent;
-}
-
-/*[type='range'] {
-    &, &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-    }
-    
-    --range: calc(var(--max) - var(--min));
-    --ratio: calc((var(--val) - var(--min))/var(--range));
-    --sx: calc(.5*#{$thumb-d} + var(--ratio)*(100% - #{$thumb-d}));
-    margin: 0;
-    padding: 0;
-    width: $track-w; height: $thumb-d;
-    background: transparent;
-    font: 1em/1 arial, sans-serif;
-    
-    &::-webkit-slider-runnable-track {
-        @include track(1)
-    }
-    &::-moz-range-track { @include track }
-    &::-ms-track { @include track }
-    
-    &::-moz-range-progress { @include fill }
-    &::-ms-fill-lower { @include fill }
-    
-    &::-webkit-slider-thumb {
-        margin-top: .5*($track-h - $thumb-d);
-        @include thumb
-    }
-    &::-moz-range-thumb { @include thumb }
-    &::-ms-thumb {
-        margin-top: 0;
-        @include thumb
-    }
-    
-    &::-ms-tooltip { display: none }
-}*/
-.track {
-  position: relative;
-}
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  margin-top: 0.5 * ($track-h - $thumb-d);
-  background: url("../../images/knob.png");
-  border: 0;
-  border-radius: 50%;
-  height: 21px;
-  width: 21px;
-  &:hover {
-    box-shadow: 0px 0px 8px #71d442;
-  }
-}
-
-.slider::-moz-range-thumb {
-  background: url("../../images/knob.png");
-  border: 0;
-  border-radius: 50%;
-  height: 21px;
-  width: 21px;
-  &:hover {
-    box-shadow: 0px 0px 8px #71d442;
-  }
+  border-color: transparent transparent colors.$lightgray-gradient-start transparent;
 }
