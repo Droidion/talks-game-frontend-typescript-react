@@ -11,6 +11,9 @@ class PhoenixSocket {
   joinChannel() {
     if (this.socket) {
       this.channel = this.socket.channel("talksgame", {});
+
+      this.channel.on("new_msg", (msg) => console.log("Got message", msg));
+
       this.channel.join().receive("ok", (resp) => {
         console.log("Joined successfully", resp);
       });
