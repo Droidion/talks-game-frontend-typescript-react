@@ -1,40 +1,19 @@
 import classnames from "classnames";
 import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
+import { connect, ConnectedProps } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
+import { RootState } from "../../redux/root-reducer";
+import adminItems from "./items/admin";
+import gameItems from "./items/game";
 import styles from "./main-menu.module.scss";
+import TeamRole from "../../types/TeamRole";
 
-const menuItems = [
-  {
-    text: "Production",
-    path: "/production",
-  },
-  {
-    text: "Deals",
-    path: "/deals",
-  },
-  {
-    text: "Upgrades",
-    path: "/upgrades",
-  },
-  {
-    text: "Results",
-    path: "/results",
-  },
-  {
-    text: "Problems",
-    path: "/problems",
-  },
-  {
-    text: "Finance",
-    path: "/finance",
-  },
-];
-
-const MainMenu: React.FC = () => {
+const MainMenu: React.FC<ConnectedProps<typeof connector>> = ({ session }) => {
   const { t } = useTranslation();
-  let location = useLocation();
+  const location = useLocation();
+  const menuItems = session?.teamType === TeamRole.Admin ? adminItems : gameItems;
   return (
     <div className={styles.wrapper}>
       {menuItems.map((menuItem, index) => (
@@ -52,9 +31,15 @@ const MainMenu: React.FC = () => {
   );
 };
 
+const mapStateToProps = (state: RootState) => ({
+  session: state.session.session,
+});
+
+const connector = connect(mapStateToProps);
+
 /**
  * Main menu for left panel
  *
  * @visibleName MainMenu
  */
-export default memo(MainMenu);
+export default memo(connector(MainMenu));
