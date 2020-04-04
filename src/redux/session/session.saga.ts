@@ -6,9 +6,17 @@ import fetchGraphQL from "../../lib/fetchGraphQL";
 import PhoenixSocket from "../../lib/PhoenixSocket";
 import ISession from "../../types/ISession";
 import {
-    EMPTY_SESSION, GET_SESSION_FROM_LOCAL_STORAGE, SET_AUTH_ERROR, SET_SESSION, SIGN_IN, SIGN_OUT,
-    SignInAction, SignOutAction
+  EMPTY_SESSION,
+  GET_SESSION_FROM_LOCAL_STORAGE,
+  SET_AUTH_ERROR,
+  SET_SESSION,
+  SIGN_IN,
+  SIGN_OUT,
+  SignInAction,
+  SignOutAction,
 } from "../../types/SessionActionTypes";
+import { push } from "connected-react-router";
+import TeamRole from "../../types/TeamRole";
 
 /** Get session from local browser storage */
 function* getSessionFromLocalStorage() {
@@ -41,6 +49,9 @@ function* signIn(action: SignInAction) {
     // Open socket
     const socket = new PhoenixSocket();
     socket.connect().joinChannel();
+    const path =
+      data.signin.teamType === TeamRole.Admin ? "/admin/timer" : "/production";
+    yield put(push(path));
   } catch (error) {
     yield put({
       type: SET_AUTH_ERROR,
@@ -63,6 +74,7 @@ function* signOut(action: SignOutAction) {
     yield call([localforage, "removeItem"], "vinkSession");
     // Clear session in Redux state
     yield put({ type: EMPTY_SESSION });
+    yield put(push("/auth/signin"));
   }
 }
 

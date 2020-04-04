@@ -1,7 +1,7 @@
 import { Decimal } from "decimal.js";
 import React, { memo } from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import PageAdminTimer from "../../../pages/admin/timer/page-admin-timer.component";
 import PageDeals from "../../../pages/deals/page-deals.component";
@@ -13,15 +13,15 @@ import PageUpgrades from "../../../pages/upgrades/page-upgrades.component";
 import { RootState } from "../../../redux/root-reducer";
 import Currency from "../../../types/Currency";
 import InformerType from "../../../types/InformerType";
+import TeamRole from "../../../types/TeamRole";
 import Header from "../../header/header.component";
 import Informer from "../../informer/informer.component";
 import LogoPanel from "../../logo-panel/logo-panel.component";
 import MainMenu from "../../main-menu/main-menu.component";
 import styles from "./layout-main.module.scss";
-import TeamRole from "../../../types/TeamRole";
 
 const LayoutMain: React.FC<ConnectedProps<typeof connector>> = ({ session }) => {
-  return (
+  return session ? (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
         <LogoPanel />
@@ -82,6 +82,8 @@ const LayoutMain: React.FC<ConnectedProps<typeof connector>> = ({ session }) => 
         </Switch>
       </div>
     </div>
+  ) : (
+    <Redirect to="/auth/signin" />
   );
 };
 

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import posed from "react-pose";
 import { connect, ConnectedProps } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 import ButtonAuth from "../../components/auth/button-auth/button-auth.component";
 import ErrorPanel from "../../components/auth/error-panel/error-panel.component";
@@ -179,12 +178,8 @@ const PageSignin: React.FC<Props> = (props) => {
     }
   };
 
-  const { session, t } = props;
-  return session ? (
-    <Redirect
-      to={selectedRole === TeamRole.Admin ? "/admin/timer" : "/production"}
-    />
-  ) : (
+  const { t } = props;
+  return (
     <div className={styles.wrapper}>
       <h1>{t("Talks Planet")}</h1>
       <h2>{t("Business Simulation by TIM Group")}</h2>

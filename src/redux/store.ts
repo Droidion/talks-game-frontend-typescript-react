@@ -1,3 +1,5 @@
+import { routerMiddleware } from "connected-react-router";
+import { createBrowserHistory } from "history";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import logger from "redux-logger";
@@ -8,10 +10,12 @@ import sessionSaga from "./session/session.saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [logger, sagaMiddleware];
+export const history = createBrowserHistory();
+
+const middlewares = [routerMiddleware(history), logger, sagaMiddleware];
 
 const store = createStore(
-  rootReducer,
+  rootReducer(history),
   composeWithDevTools(applyMiddleware(...middlewares))
 );
 

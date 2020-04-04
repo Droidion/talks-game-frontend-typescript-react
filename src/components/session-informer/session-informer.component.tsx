@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { connect, ConnectedProps } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 import { RootState } from "../../redux/root-reducer";
 import { signOut } from "../../redux/session/session.actions";
@@ -12,6 +11,7 @@ const SessionInformer: React.FC<ConnectedProps<typeof connector>> = ({
   signOut,
 }) => {
   const { t } = useTranslation();
+
   return session ? (
     <div className={styles.wrapper}>
       <div>
@@ -21,9 +21,7 @@ const SessionInformer: React.FC<ConnectedProps<typeof connector>> = ({
         {t("Sign out")}
       </button>
     </div>
-  ) : (
-    <Redirect to="/auth/signin" />
-  );
+  ) : null;
 };
 
 const mapStateToProps = (state: RootState) => ({

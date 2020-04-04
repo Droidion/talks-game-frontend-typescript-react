@@ -21,7 +21,18 @@ const SIGN_OUT = `
   }
 `;
 
+const TIMERS = `
+  query TimersQuery {
+    timers {
+      hour
+      minute
+      period
+    }
+  }
+`;
+
 export default {
   SIGN_IN,
   SIGN_OUT,
+  TIMERS,
 };
