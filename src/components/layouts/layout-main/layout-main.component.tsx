@@ -2,6 +2,7 @@ import { Decimal } from "decimal.js";
 import React, { memo } from "react";
 import { Route, Switch } from "react-router-dom";
 
+import PageAdminTimer from "../../../pages/admin/timer/page-admin-timer.component";
 import PageDeals from "../../../pages/deals/page-deals.component";
 import PageFinance from "../../../pages/finance/page-finance.component";
 import PageProblems from "../../../pages/problems/page-problems.component";
@@ -67,6 +68,9 @@ const LayoutMain: React.FC = () => {
           </Route>
           <Route exact path="/upgrades">
             <PageUpgrades />
+          </Route>
+          <Route exact path="/admin/timer">
+            <PageAdminTimer />
           </Route>
         </Switch>
       </div>

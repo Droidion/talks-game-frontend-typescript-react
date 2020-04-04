@@ -20,6 +20,8 @@
     "Trainings and Simulations": "Тренинги и имитационное моделирование",
     "Upgrades": "Улучшения",
     "User not found": "Пользователь не найден",
-    "Wrong password": "Неверный пароль"
+    "Wrong password": "Неверный пароль",
+    "Admin": "Администратор",
+    "Timer Management": "Управление таймером"
   }
 }

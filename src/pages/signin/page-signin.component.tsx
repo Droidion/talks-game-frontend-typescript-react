@@ -47,19 +47,23 @@ const PageSignin: React.FC<Props> = (props) => {
     setTimeout(timeoutCallback, 300);
   };
 
-  /** Go one step further */
-  const goNextStep = () => {
+  /** Go some number of steps further step further
+   *  Admin does not need a second step and should go to step 1
+   */
+  const goForwads = (steps: number) => {
     moveStep(() => {
-      setStep(step + 1);
+      setStep(step + steps);
       setIsVisible(true);
     });
   };
 
-  /** Go one step earlier */
-  const goPrevStep = () => {
+  /** Go some number of steps backwards
+   *  Admin does not need a second step and should go to step 1
+   */
+  const goBackwards = (steps: number) => {
     moveStep(() => {
       props.emptyAuthError();
-      setStep(step - 1);
+      setStep(step - steps);
       setIsVisible(true);
     });
   };
@@ -67,17 +71,22 @@ const PageSignin: React.FC<Props> = (props) => {
   /** Set team role to state and move to next step */
   const setRole = (role: TeamRole) => {
     setSelectedRole(role);
-    goNextStep();
+    if (role === TeamRole.Admin) {
+      goForwads(2);
+    } else {
+      goForwads(1);
+    }
   };
 
   /** Set team number to state and move to next step */
   const setNumber = (num: number) => {
     setSelectedNumber(num);
-    goNextStep();
+    goForwads(1);
   };
 
   /** Construct login from team role and team number */
   const composeLogin = (): string | undefined => {
+    if (selectedRole === TeamRole.Admin) return selectedRole;
     if (!selectedRole || !selectedNumber) return undefined;
     return selectedRole + selectedNumber;
   };
@@ -87,7 +96,7 @@ const PageSignin: React.FC<Props> = (props) => {
     return (
       <div className={styles.buttonBack}>
         <ButtonAuth
-          handleClick={() => goPrevStep()}
+          handleClick={() => goBackwards(selectedRole === TeamRole.Admin ? 2 : 1)}
           isLoading={false}
           text={props.t("Back")}
         />
@@ -98,12 +107,20 @@ const PageSignin: React.FC<Props> = (props) => {
   /** Step with team role selection */
   const roleSelectors = () => {
     return (
-      <Box className={styles.selectorList} pose={isVisible ? "visible" : "hidden"}>
-        {[TeamRole.Supplier, TeamRole.Consumer].map((el) => (
-          <div key={el} data-testid={el} className={styles.selectorEl}>
-            <TeamRoleSelector handleClick={setRole} isSelected={false} role={el} />
-          </div>
-        ))}
+      <Box pose={isVisible ? "visible" : "hidden"}>
+        <div className={styles.selectorList}>
+          {[TeamRole.Supplier, TeamRole.Consumer].map((el) => (
+            <div key={el} data-testid={el} className={styles.selectorEl}>
+              <TeamRoleSelector handleClick={setRole} isSelected={false} role={el} />
+            </div>
+          ))}
+        </div>
+        <div
+          className={styles.selectorAdmin}
+          onClick={() => setRole(TeamRole.Admin)}
+        >
+          {t("Admin")}
+        </div>
       </Box>
     );
   };
@@ -164,7 +181,9 @@ const PageSignin: React.FC<Props> = (props) => {
 
   const { session, t } = props;
   return session ? (
-    <Redirect to="/production" />
+    <Redirect
+      to={selectedRole === TeamRole.Admin ? "/admin/timer" : "/production"}
+    />
   ) : (
     <div className={styles.wrapper}>
       <h1>{t("Talks Planet")}</h1>
