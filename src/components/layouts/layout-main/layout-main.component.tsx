@@ -1,5 +1,6 @@
 import { Decimal } from "decimal.js";
 import React, { memo } from "react";
+import { connect, ConnectedProps } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import PageAdminTimer from "../../../pages/admin/timer/page-admin-timer.component";
@@ -9,6 +10,7 @@ import PageProblems from "../../../pages/problems/page-problems.component";
 import PageProduction from "../../../pages/production/page-production.component";
 import PageResults from "../../../pages/results/page-results.component";
 import PageUpgrades from "../../../pages/upgrades/page-upgrades.component";
+import { RootState } from "../../../redux/root-reducer";
 import Currency from "../../../types/Currency";
 import InformerType from "../../../types/InformerType";
 import Header from "../../header/header.component";
@@ -16,8 +18,9 @@ import Informer from "../../informer/informer.component";
 import LogoPanel from "../../logo-panel/logo-panel.component";
 import MainMenu from "../../main-menu/main-menu.component";
 import styles from "./layout-main.module.scss";
+import TeamRole from "../../../types/TeamRole";
 
-const LayoutMain: React.FC = () => {
+const LayoutMain: React.FC<ConnectedProps<typeof connector>> = ({ session }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
@@ -29,18 +32,22 @@ const LayoutMain: React.FC = () => {
       <div className={styles.menu}>
         <MainMenu />
         <div className={styles.informerList}>
-          <Informer
-            currency={Currency.Rouble}
-            title={"Денежные средства"}
-            type={InformerType.Regular}
-            value={new Decimal(100590.5544)}
-          />
-          <Informer
-            currency={Currency.Rouble}
-            title={"Денежные средства"}
-            type={InformerType.Regular}
-            value={new Decimal(1000000)}
-          />
+          {session?.teamType !== TeamRole.Admin && (
+            <>
+              <Informer
+                currency={Currency.Rouble}
+                title={"Денежные средства"}
+                type={InformerType.Regular}
+                value={new Decimal(100590.5544)}
+              />
+              <Informer
+                currency={Currency.Rouble}
+                title={"Денежные средства"}
+                type={InformerType.Regular}
+                value={new Decimal(1000000)}
+              />
+            </>
+          )}
           <Informer
             currency={Currency.Rouble}
             title={"До конца периода"}
@@ -78,9 +85,15 @@ const LayoutMain: React.FC = () => {
   );
 };
 
+const mapStateToProps = (state: RootState) => ({
+  session: state.session.session,
+});
+
+const connector = connect(mapStateToProps);
+
 /**
  * Layout for main game after authentication
  *
  * @visibleName LayoutMain
  */
-export default memo(LayoutMain);
+export default memo(connector(LayoutMain));
