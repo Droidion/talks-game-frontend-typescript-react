@@ -21,7 +21,7 @@ import MainMenu from "../../main-menu/main-menu.component";
 import styles from "./layout-main.module.scss";
 
 const LayoutMain: React.FC<ConnectedProps<typeof connector>> = ({ session }) => {
-  return session ? (
+  return (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
         <LogoPanel />
@@ -82,8 +82,6 @@ const LayoutMain: React.FC<ConnectedProps<typeof connector>> = ({ session }) => 
         </Switch>
       </div>
     </div>
-  ) : (
-    <Redirect to="/auth/signin" />
   );
 };
 

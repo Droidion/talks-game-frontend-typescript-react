@@ -22,8 +22,8 @@ const SIGN_OUT = `
 `;
 
 const TIMERS = `
-  query TimersQuery {
-    timers {
+  query TimersQuery($token: String!) {
+    timers(token: $token) {
       hour
       minute
       period

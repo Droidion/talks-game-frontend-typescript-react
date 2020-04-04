@@ -28,9 +28,12 @@ function* getSessionFromLocalStorage() {
       // Open socket
       const socket = new PhoenixSocket();
       socket.connect().joinChannel();
+    } else {
+      yield put(push("/auth/signin"));
     }
   } catch (e) {
     console.log("Could not load session from local storage: ", e);
+    yield put(push("/auth/signin"));
   }
 }
 
