@@ -1,0 +1,14 @@
+.element {
+  align-items: center;
+  display: flex;
+  margin: 1rem 0;
+}
+
+.section {
+  margin-right: 2rem;
+}
+
+.periodNumber {
+  composes: section;
+  font-size: 1.5rem;
+}

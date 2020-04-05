@@ -6,6 +6,8 @@ import formatNumbersAsCurrency from "../../lib/formatNumbersAsCurrency";
 import styles from "./numeric-input.module.scss";
 
 interface INumericInputProps {
+  /** Number if digits to show after dots. */
+  digitsAfterDot?: number;
   /** Callback function for returning value on change*/
   handleChange: (input: Decimal) => void;
   /** Amount for increase/decrease buttons */
@@ -13,15 +15,15 @@ interface INumericInputProps {
   /** Initial value of input */
   initialValue: Decimal;
   /** Should input be disabled */
-  isDisabled: boolean;
+  isDisabled?: boolean;
   /** Should min/max helper buttons be shown */
-  isExtremeHelpersActive: boolean;
+  isExtremeHelpersActive?: boolean;
   /** Should increase/decrease helper buttons be shown */
-  isIncrementerActive: boolean;
+  isIncrementerActive?: boolean;
   /** Max possible value */
   maxPossibleValue: Decimal;
   /** Min possible value */
-  minPossibleValue: Decimal;
+  minPossibleValue?: Decimal;
 }
 
 /**
@@ -31,19 +33,20 @@ interface INumericInputProps {
  */
 
 const NumericInput: React.FC<INumericInputProps> = ({
+  digitsAfterDot = 2,
   handleChange,
   incrementalAmount,
   initialValue,
-  isDisabled,
-  isExtremeHelpersActive,
-  isIncrementerActive,
+  isDisabled = false,
+  isExtremeHelpersActive = true,
+  isIncrementerActive = true,
   maxPossibleValue = new Decimal(0),
   minPossibleValue = new Decimal(0),
 }) => {
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const [position, setPosition] = useState<number>();
   const [value, setvalue] = useState(
-    formatNumbersAsCurrency(initialValue.toFixed(2))
+    formatNumbersAsCurrency(initialValue.toFixed(digitsAfterDot))
   );
 
   /** Clamp an value within a minPossibleValue and maxPossibleValue */
@@ -85,7 +88,7 @@ const NumericInput: React.FC<INumericInputProps> = ({
       if (shouldCommitInput(inputValue)) {
         const calculatedValue = clamp(inputValue);
         const formattedCalcValue = formatNumbersAsCurrency(
-          calculatedValue.toFixed(2)
+          calculatedValue.toFixed(digitsAfterDot)
         );
 
         setvalue(formattedCalcValue);
@@ -112,7 +115,9 @@ const NumericInput: React.FC<INumericInputProps> = ({
     const calculatedValue = clamp(
       new Decimal(currentValue).add(increment).toString()
     );
-    const formattedCalc = formatNumbersAsCurrency(calculatedValue.toFixed(2));
+    const formattedCalc = formatNumbersAsCurrency(
+      calculatedValue.toFixed(digitsAfterDot)
+    );
 
     setvalue(formattedCalc);
     handleChange(calculatedValue);
@@ -134,7 +139,9 @@ const NumericInput: React.FC<INumericInputProps> = ({
     const extremeType = event.currentTarget.name;
     const calculatedValue =
       extremeType === "max" ? maxPossibleValue : minPossibleValue;
-    const formattedCalc = formatNumbersAsCurrency(calculatedValue.toFixed(2));
+    const formattedCalc = formatNumbersAsCurrency(
+      calculatedValue.toFixed(digitsAfterDot)
+    );
     setvalue(formattedCalc);
     handleChange(calculatedValue);
   };

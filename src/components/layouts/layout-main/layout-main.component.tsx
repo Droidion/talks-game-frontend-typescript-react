@@ -1,7 +1,7 @@
 import { Decimal } from "decimal.js";
 import React, { memo } from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import PageAdminTimer from "../../../pages/admin/timer/page-admin-timer.component";
 import PageDeals from "../../../pages/deals/page-deals.component";
