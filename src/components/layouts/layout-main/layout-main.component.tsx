@@ -1,8 +1,9 @@
 import { Decimal } from "decimal.js";
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
+import Timer from "../../../lib/timer";
 import PageAdminTimer from "../../../pages/admin/timer/page-admin-timer.component";
 import PageDeals from "../../../pages/deals/page-deals.component";
 import PageFinance from "../../../pages/finance/page-finance.component";
@@ -20,7 +21,26 @@ import LogoPanel from "../../logo-panel/logo-panel.component";
 import MainMenu from "../../main-menu/main-menu.component";
 import styles from "./layout-main.module.scss";
 
+const timer = new Timer();
+timer.setInitialTimeLeft("11:59:57", "12:00:00");
 const LayoutMain: React.FC<ConnectedProps<typeof connector>> = ({ session }) => {
+  const [timerValue, setTimer] = useState<string>("");
+  useEffect(() => {
+    const interval = setInterval(() => tick(), 1000);
+    const tick = () => {
+      setTimer(timer.value);
+      if (timer.value !== timerValue) {
+        timer.decreaseTimeLeft();
+      } else {
+        clearInterval(interval);
+      }
+    };
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timerValue]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
@@ -52,7 +72,7 @@ const LayoutMain: React.FC<ConnectedProps<typeof connector>> = ({ session }) => 
             currency={Currency.Rouble}
             title={"До конца периода"}
             type={InformerType.Important}
-            value={"12:56"}
+            value={timerValue}
           />
         </div>
       </div>
